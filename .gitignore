@@ -1,0 +1,12 @@
+# Dependency directory
+node_modules
+coverage
+test-report.html
+
+# Ignore built ts files
+dist/**/*
+
+.DS_Store
+.envrc
+.idea/
+.vscode
