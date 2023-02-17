@@ -1,4 +1,12 @@
 import express, { Express, Request, Response } from 'express';
+import { setup } from './utils/db-setup';
+
+setup().then(() => {
+  console.log('db setup success.');
+}
+).catch(() => {
+  console.log("db connect error: ");
+});
 
 const app: Express = express();
 const port = 3000;
