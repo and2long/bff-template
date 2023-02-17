@@ -1,9 +1,13 @@
 import User from "../entities/user";
-import { UserInterface } from "../interfaces/user";
+import { CreateUser, UserInterface } from "../interfaces/user";
 
 class UserRepository {
   public async findAllUsers(): Promise<UserInterface[]> {
     return User.findAll();
+  }
+
+  public async createUser(user: CreateUser): Promise<[UserInterface, boolean]> {
+    return User.findOrCreate({ where: { userId: user.userId }, defaults: user },);
   }
 }
 

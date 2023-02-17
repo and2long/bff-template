@@ -18,3 +18,5 @@ export interface UserInterface {
   phoneNumber?: string;
   introduction?: string;
 }
+
+export interface CreateUser extends Pick<UserInterface, "userId" | "username"> { };
