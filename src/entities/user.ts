@@ -1,8 +1,8 @@
-import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { Gender, UserInterface } from '../interfaces/user';
 
 @Table({ tableName: "Users" })
-class User extends Model implements UserInterface {
+export default class User extends Model implements UserInterface {
 
   @Column({
     type: DataType.INTEGER,
@@ -53,4 +53,10 @@ class User extends Model implements UserInterface {
 
   @Column({ allowNull: true })
   birthday!: Date;
+
+  @UpdatedAt
+  public updatedAt!: Date;
+
+  @CreatedAt
+  public createdAt!: Date;
 }

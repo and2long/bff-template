@@ -15,12 +15,14 @@ module.exports = {
         allowNull: false
       },
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.fn('NOW')
       },
-      updatedAt: {
+      updateAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.fn('NOW')
       },
       isDoctor: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
       isPatient: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },

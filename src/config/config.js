@@ -15,5 +15,4 @@ const dbConfig = {
   },
   logging: false
 }
-
 module.exports = dbConfig
