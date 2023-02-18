@@ -1,0 +1,12 @@
+{
+  "realm": "qunai",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "external",
+  "resource": "qunai-medical",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "MBPdYr0LHW1cn24T2kxoq9HpuKGKPjSc"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}

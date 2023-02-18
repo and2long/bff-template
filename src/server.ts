@@ -1,4 +1,4 @@
-import app from './app';
+import { app } from './app';
 import { setupDB } from './utils/db-setup';
 
 setupDB();
