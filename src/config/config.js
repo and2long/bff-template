@@ -1,3 +1,4 @@
+// file name must named `config.js`!!!
 const dbConfig = {
   username: "postgres",
   host: "localhost",
