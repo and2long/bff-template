@@ -1,12 +1,7 @@
 import app from './app';
-import { setup } from './utils/db-setup';
+import { setupDB } from './utils/db-setup';
 
-setup().then(() => {
-  console.log('db connect success.');
-}
-).catch(() => {
-  console.log("db connect error.");
-});
+setupDB();
 
 const port = 3000;
 app.listen(port, () => {

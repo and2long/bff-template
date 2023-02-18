@@ -6,6 +6,10 @@ export const sequelize = new Sequelize(dbConfig);
 const entityPath = path.resolve(__dirname, "../entities");
 sequelize.addModels([entityPath]);
 
-export const setup = async () => {
-  await sequelize.authenticate();
+export const setupDB = async () => {
+  try {
+    await sequelize.authenticate();
+  } catch (error) {
+    console.log("db connect error: ", error);
+  }
 }
