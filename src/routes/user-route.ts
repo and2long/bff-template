@@ -9,9 +9,7 @@ userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {
 }));
 
 userRoute.post("/", asyncHandler(async (req: Request, res: Response) => {
-  console.log(req.params);
-  
-  const { userId, username } = req.params;
+  const { userId, username } = req.body;
   const newUser = await UserService.createUser({ userId, username });
   res.json({ newUser });
 }));
