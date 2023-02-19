@@ -14,7 +14,7 @@ app.use(httpRequestLogger);
 app.use(httpResponseLogger);
 
 app.use(session({
-  secret: 'MBPdYr0LHW1cn24T2kxoq9HpuKGKPjSc',
+  secret: `${process.env.KEYCLOAK_CLIENT_SECRET}`,
   resave: false,
   saveUninitialized: true,
   store: memoryStore
