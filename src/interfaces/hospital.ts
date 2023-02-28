@@ -1,6 +1,6 @@
-export interface Hospital {
+export interface HospitalInterface {
   name: string;
-  introduction: string;
-  location: string;
-  latLong: string;
+  location?: string;
+  latLong?: string;
+  introduction?: string;
 }

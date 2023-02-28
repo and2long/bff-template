@@ -1,4 +1,4 @@
-export interface Department {
+export interface DepartmentInterface {
   name: string;
-  introduction: string;
+  introduction?: string;
 }
