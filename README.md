@@ -21,3 +21,7 @@ start-dev \
 --db-password=password \
 --hostname=localhost
 ```
+## initial db
+`npm run setup-database`
+## start
+`npm run dev`
