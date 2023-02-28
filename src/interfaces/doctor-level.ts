@@ -1,3 +1,3 @@
 export interface DoctorLevelInterface {
-  title: string;
+  name: string;
 }

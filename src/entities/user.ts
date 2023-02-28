@@ -1,7 +1,7 @@
 import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { Gender, UserInterface } from '../interfaces/user';
 
-@Table({ tableName: "Users" })
+@Table
 export default class User extends Model implements UserInterface {
 
   @Column({
@@ -39,24 +39,24 @@ export default class User extends Model implements UserInterface {
   @Column({ allowNull: false, defaultValue: false })
   isAssistant!: boolean;
 
-  @Column({ allowNull: true })
-  avatar!: string;
+  @Column
+  avatar?: string;
 
-  @Column({ allowNull: true })
-  phoneNumber!: string;
+  @Column
+  phoneNumber?: string;
 
-  @Column({ allowNull: true })
-  introduction!: string;
+  @Column
+  introduction?: string;
 
   @Column({ allowNull: false })
   username!: string;
 
-  @Column({ allowNull: true })
-  birthday!: Date;
+  @Column
+  birthday?: Date;
 
   @UpdatedAt
-  public updatedAt!: Date;
+  updatedAt!: Date;
 
   @CreatedAt
-  public createdAt!: Date;
+  createdAt!: Date;
 }
