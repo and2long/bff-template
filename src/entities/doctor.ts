@@ -4,7 +4,7 @@ import Department from './department';
 import DoctorLevel from './doctor-level';
 import Hospital from './hospital';
 
-@Table
+@Table({ tableName: "Doctor" })
 export default class Doctor extends Model implements DoctorInterface {
 
   @Column({

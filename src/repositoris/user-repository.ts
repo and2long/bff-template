@@ -2,7 +2,7 @@ import User from "../entities/user";
 import { CreateUser, UserInterface } from "../interfaces/user";
 
 class UserRepository {
-  public async findAllUsers(): Promise<UserInterface[]> {
+  public async findAll(): Promise<UserInterface[]> {
     return User.findAll();
   }
 

@@ -1,6 +1,8 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response, Router } from 'express';
 import session from "express-session";
+import { departmentRoute } from "./routes/department-route";
+import { doctorRoute } from "./routes/doctor-route";
 import { userRoute } from "./routes/user-route";
 import { keycloak, memoryStore } from "./utils/keycloak-setup";
 import { httpRequestLogger, httpResponseLogger } from './utils/loggers';
@@ -28,5 +30,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 const apiV1Router = Router();
-app.use("/api/users", apiV1Router);
-apiV1Router.use("/", userRoute);
+app.use("/api", apiV1Router);
+apiV1Router.use("/users", userRoute);
+apiV1Router.use("/departments", departmentRoute);
+apiV1Router.use("/doctors", doctorRoute);

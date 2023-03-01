@@ -1,7 +1,7 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { DepartmentInterface } from "../interfaces/department";
 
-@Table
+@Table({ tableName: "Department" })
 export default class Department extends Model implements DepartmentInterface {
 
   @Column({

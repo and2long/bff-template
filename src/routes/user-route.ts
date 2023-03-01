@@ -5,8 +5,8 @@ import { keycloak } from "../utils/keycloak-setup";
 
 export const userRoute = Router();
 userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {
-  const users = await UserService.findAllUsers();
-  res.json({ users });
+  const data = await UserService.findAll();
+  res.json({ data });
 }));
 
 userRoute.post("/", asyncHandler(async (req: Request, res: Response) => {
