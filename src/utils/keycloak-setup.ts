@@ -1,6 +1,7 @@
 
 import session from 'express-session';
 import Keycloak from 'keycloak-connect';
+import envConfig from '../config/env-config';
 
 const kcConfig = {
   "confidential-port": 0,
@@ -10,7 +11,7 @@ const kcConfig = {
   "bearer-only": true,
   "realm": "qunai",
   "credentials": {
-    "secret": process.env.KEYCLOAK_CLIENT_SECRET
+    "secret": envConfig.keycloakClientSecret
   },
   "policy-enforcer": {}
 };

@@ -2,7 +2,7 @@ const path = require("path")
 console.log(`INFO: Processing .sequelizerc for Environment:[${process.env.NODE_ENV}]`)
 
 module.exports = {
-  'config': path.resolve('src', 'config', 'config.js'),
+  'config': path.resolve('src', 'config', 'db-config.js'),
   'models-path': path.resolve('src', 'entities'),
   'migrations-path': path.resolve('src', 'migrations')
 }
