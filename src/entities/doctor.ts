@@ -1,4 +1,4 @@
-import { BelongsTo, Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { DoctorInterface } from '../interfaces/user';
 import Department from './department';
 import DoctorLevel from './doctor-level';
@@ -25,17 +25,32 @@ export default class Doctor extends Model implements DoctorInterface {
   @Column
   introduction?: string;
 
-  @UpdatedAt
-  updatedAt!: Date;
-
-  @CreatedAt
-  createdAt!: Date;
+  @ForeignKey(() => Hospital)
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER
+  })
+  hospitalId!: number;
 
   @BelongsTo(() => Hospital)
   hospital!: Hospital;
 
+  @ForeignKey(() => Department)
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER
+  })
+  departmentId!: number;
+
   @BelongsTo(() => Department)
   department!: Department;
+
+  @ForeignKey(() => DoctorLevel)
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER
+  })
+  levelId!: number;
 
   @BelongsTo(() => DoctorLevel)
   level!: DoctorLevel;

@@ -15,19 +15,9 @@ module.exports = {
         allowNull: false
       },
       introduction: { type: Sequelize.STRING, allowNull: true },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
-      },
-      hospital: { type: Sequelize.Hospital },
-      department: { type: Sequelize.Department },
-      level: { type: Sequelize.DoctorLevel },
+      hospitalId: { type: Sequelize.INTEGER, allowNull: false },
+      departmentId: {type: Sequelize.INTEGER, allowNull: false },
+      levelId: { type: Sequelize.INTEGER, allowNull: false },
     });
   },
 
