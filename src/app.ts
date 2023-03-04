@@ -29,8 +29,8 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, this is Express + TypeScript');
 });
 
-const apiV1Router = Router();
-app.use("/api", apiV1Router);
-apiV1Router.use("/users", userRoute);
-apiV1Router.use("/departments", departmentRoute);
-apiV1Router.use("/doctors", doctorRoute);
+const apiRouter = Router();
+app.use("/api", apiRouter);
+apiRouter.use("/users", userRoute);
+apiRouter.use("/departments", departmentRoute);
+apiRouter.use("/doctors", doctorRoute);
