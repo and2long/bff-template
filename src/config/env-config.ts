@@ -2,7 +2,7 @@ import { get } from "lodash";
 
 class EnvConfig {
   public get nodeEnv(): String {
-    return get(process.env, "NODE_ENV", "dev");
+    return get(process.env, "NODE_ENV", "development");
   }
 
   public get keycloakClientSecret(): String {
