@@ -13,6 +13,6 @@ const dbConfig = {
   dialectOptions: {
     useUTC: false
   },
-  logging: false
+  logging: true
 }
 module.exports = dbConfig
