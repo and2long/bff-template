@@ -1,10 +1,10 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { DoctorInterface } from '../interfaces/user';
 import Department from './department';
 import DoctorLevel from './doctor-level';
 import Hospital from './hospital';
 
-@Table
+@Table({ tableName: "Doctors" })
 export default class Doctor extends Model implements DoctorInterface {
 
   @Column({
@@ -55,4 +55,9 @@ export default class Doctor extends Model implements DoctorInterface {
   @BelongsTo(() => DoctorLevel)
   level!: DoctorLevel;
 
+  @UpdatedAt
+  updatedAt!: Date;
+
+  @CreatedAt
+  createdAt!: Date;
 }

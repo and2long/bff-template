@@ -1,7 +1,7 @@
 import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { Gender, UserInterface } from '../interfaces/user';
 
-@Table
+@Table({ tableName: "Users" })
 export default class User extends Model implements UserInterface {
 
   @Column({

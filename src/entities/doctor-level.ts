@@ -1,7 +1,7 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { DoctorLevelInterface } from '../interfaces/doctor-level';
 
-@Table
+@Table({ tableName: "DoctorLevels" })
 export default class DoctorLevel extends Model implements DoctorLevelInterface {
 
   @Column({
@@ -15,4 +15,9 @@ export default class DoctorLevel extends Model implements DoctorLevelInterface {
   @Column({ allowNull: false })
   name!: string;
 
+  @UpdatedAt
+  updatedAt!: Date;
+
+  @CreatedAt
+  createdAt!: Date;
 }

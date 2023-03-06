@@ -1,7 +1,7 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { HospitalInterface } from "../interfaces/hospital";
 
-@Table
+@Table({ tableName: "Hospitals" })
 export default class Hospital extends Model implements HospitalInterface {
 
   @Column({
@@ -20,8 +20,13 @@ export default class Hospital extends Model implements HospitalInterface {
 
   @Column
   latLong?: string;
-  
+
   @Column
   introduction?: string;
 
+  @UpdatedAt
+  updatedAt!: Date;
+
+  @CreatedAt
+  createdAt!: Date;
 }
