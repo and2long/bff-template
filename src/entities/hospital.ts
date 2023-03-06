@@ -1,5 +1,6 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { HospitalInterface } from "../interfaces/hospital";
+import Doctor from './doctor';
 
 @Table({ tableName: "Hospitals" })
 export default class Hospital extends Model implements HospitalInterface {
@@ -29,4 +30,7 @@ export default class Hospital extends Model implements HospitalInterface {
 
   @CreatedAt
   createdAt!: Date;
+
+  @HasMany(() => Doctor)
+  doctors!: Doctor[];
 }

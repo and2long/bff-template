@@ -1,5 +1,6 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
 import { DoctorLevelInterface } from '../interfaces/doctor-level';
+import Doctor from './doctor';
 
 @Table({ tableName: "DoctorLevels" })
 export default class DoctorLevel extends Model implements DoctorLevelInterface {
@@ -20,4 +21,7 @@ export default class DoctorLevel extends Model implements DoctorLevelInterface {
 
   @CreatedAt
   createdAt!: Date;
+
+  @HasMany(() => Doctor)
+  doctors!: Doctor[];
 }
