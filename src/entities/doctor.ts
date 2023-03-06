@@ -1,4 +1,4 @@
-import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { DoctorInterface } from '../interfaces/user';
 import Department from './department';
 import DoctorLevel from './doctor-level';

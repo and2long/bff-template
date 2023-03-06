@@ -1,4 +1,4 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { HospitalInterface } from "../interfaces/hospital";
 
 @Table
