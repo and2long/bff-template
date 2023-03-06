@@ -5,12 +5,12 @@
 Need to run postgres and keycloak in docker.
 ## run postgres
 - `docker volume create pg_data`
-- `docker run -itd --name postgres  -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -v pg_data:/var/lib/postgresql/data postgres`
+- `docker run -itd --name postgres  -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -v pg_data:/var/lib/postgresql/data postgres:14.7`
 ## create database `keycloakdb`
 create the database if it does not exist.
 ## run keycloak
 ```
-docker run \
+docker run -itd \
 --name keycloak \
 -p 8080:8080 \
 -e KEYCLOAK_ADMIN=admin \
