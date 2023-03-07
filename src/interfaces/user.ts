@@ -1,13 +1,8 @@
-import { DepartmentInterface } from "./department";
-import { DoctorLevelInterface } from "./doctor-level";
-import { HospitalInterface } from "./hospital";
-
 export enum Gender {
   MALE = "male",
   FAMALE = "female",
   UNKNOW = "unknown",
 }
-
 
 export interface UserInterface {
   userId: string;
@@ -24,12 +19,3 @@ export interface UserInterface {
 }
 
 export interface CreateUser extends Pick<UserInterface, "userId" | "username"> { };
-
-
-export interface DoctorInterface {
-  userId: string;
-  hospital: HospitalInterface;
-  department: DepartmentInterface;
-  level: DoctorLevelInterface;
-  introduction?: string;
-}

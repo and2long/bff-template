@@ -1,9 +1,10 @@
+import { HospitalDTO, HospitalDTOMapper } from "../dtos/hospital-dto";
 import Hospital from "../entities/hospital";
-import { HospitalInterface } from "../interfaces/hospital";
 
 class HospitalRepository {
-  public async findAll(): Promise<HospitalInterface[]> {
-    return Hospital.findAll();
+  public async findAll(): Promise<HospitalDTO[]> {
+    const items = await Hospital.findAll();
+    return items.map((item: Hospital) => HospitalDTOMapper.mapToDTO(item));
   }
 }
 

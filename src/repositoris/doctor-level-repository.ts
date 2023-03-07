@@ -1,9 +1,10 @@
+import { DoctorLevelDTO, DoctorLevelDTOMapper } from "../dtos/doctor-level-dto";
 import DoctorLevel from "../entities/doctor-level";
-import { DoctorLevelInterface } from "../interfaces/doctor-level";
 
 class DoctorLevelRepository {
-  public async findAll(): Promise<DoctorLevelInterface[]> {
-    return DoctorLevel.findAll();
+  public async findAll(): Promise<DoctorLevelDTO[]> {
+    const items = await DoctorLevel.findAll();
+    return items.map((item: DoctorLevel) => DoctorLevelDTOMapper.mapToDTO(item));
   }
 }
 

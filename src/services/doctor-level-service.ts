@@ -1,7 +1,7 @@
-import { DoctorLevelInterface } from "../interfaces/doctor-level";
+import { DoctorLevelDTO } from "../dtos/doctor-level-dto";
 import doctorLevelRepository from "../repositoris/doctor-level-repository";
 
-const findAll = async (): Promise<DoctorLevelInterface[]> => {
+const findAll = async (): Promise<DoctorLevelDTO[]> => {
   return doctorLevelRepository.findAll();
 }
 

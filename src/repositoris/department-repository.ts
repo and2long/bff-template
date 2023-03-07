@@ -1,9 +1,10 @@
+import { DepartmentDTO, DepartmentDTOMapper } from "../dtos/department-dto";
 import Department from "../entities/department";
-import { DepartmentInterface } from "../interfaces/department";
 
 class DepartmentRepository {
-  public async findAll(): Promise<DepartmentInterface[]> {
-    return Department.findAll();
+  public async findAll(): Promise<DepartmentDTO[]> {
+    const items = await Department.findAll();
+    return items.map((item: Department) => DepartmentDTOMapper.mapToDTO(item));
   }
 }
 

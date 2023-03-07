@@ -1,7 +1,7 @@
-import { HospitalInterface } from "../interfaces/hospital";
+import { HospitalDTO } from "../dtos/hospital-dto";
 import hospitalRepository from "../repositoris/hospital-repository";
 
-const findAll = async (): Promise<HospitalInterface[]> => {
+const findAll = async (): Promise<HospitalDTO[]> => {
   return hospitalRepository.findAll();
 }
 
