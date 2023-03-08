@@ -1,8 +1,8 @@
 import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
-import { Gender, UserInterface } from '../interfaces/user';
+import { Gender } from '../dtos/user-dto';
 
 @Table
-export default class User extends Model implements UserInterface {
+export default class User extends Model {
 
   @Column({
     type: DataType.INTEGER,
@@ -19,6 +19,9 @@ export default class User extends Model implements UserInterface {
   })
   userId!: string;
 
+  @Column({ allowNull: false })
+  username!: string;
+
   @Column({
     allowNull: false,
     defaultValue: Gender.UNKNOW,
@@ -30,26 +33,11 @@ export default class User extends Model implements UserInterface {
   })
   gender!: Gender;
 
-  @Column({ allowNull: false, defaultValue: false })
-  isDoctor!: boolean;
-
-  @Column({ allowNull: false, defaultValue: true })
-  isPatient!: boolean;
-
-  @Column({ allowNull: false, defaultValue: false })
-  isAssistant!: boolean;
-
-  @Column
-  avatar?: string;
-
   @Column
   phoneNumber?: string;
 
   @Column
   introduction?: string;
-
-  @Column({ allowNull: false })
-  username!: string;
 
   @Column
   birthday?: Date;

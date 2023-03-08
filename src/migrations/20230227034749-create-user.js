@@ -24,12 +24,8 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.fn('NOW')
       },
-      isDoctor: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-      isPatient: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
-      isAssistant: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-      avatar: { type: Sequelize.STRING, allowNull: true },
       phoneNumber: { type: Sequelize.STRING, allowNull: true },
-      introduction: { type: Sequelize.TEXT, allowNull: true },
+      introduction: { type: Sequelize.STRING, allowNull: true },
       username: { type: Sequelize.STRING, allowNull: false },
       birthday: { type: Sequelize.DATE, allowNull: true },
       gender: {

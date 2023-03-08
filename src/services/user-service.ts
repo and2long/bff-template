@@ -1,11 +1,13 @@
-import { CreateUser, UserInterface } from "../interfaces/user";
+import { UserDTO } from "../dtos/user-dto";
+import User from "../entities/user";
+import { CreateUser } from "../interfaces/user";
 import userRepository from "../repositoris/user-repository";
 
-const findAll = async (): Promise<UserInterface[]> => {
+const findAll = async (): Promise<UserDTO[]> => {
   return userRepository.findAll();
 };
 
-const createUser = async (user: CreateUser): Promise<[UserInterface, boolean]> => {
+const createUser = async (user: CreateUser): Promise<[User, boolean]> => {
   return userRepository.createUser(user);
 };
 
