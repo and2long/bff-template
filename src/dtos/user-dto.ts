@@ -1,11 +1,7 @@
+import { Gender } from "../constants/gender";
 import User from "../entities/user";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
-export enum Gender {
-  MALE = "male",
-  FAMALE = "female",
-  UNKNOW = "unknown",
-}
 
 export interface UserDTO {
   userId: string;

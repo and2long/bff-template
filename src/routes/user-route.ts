@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import asyncHandler from "express-async-handler";
+import _ from "lodash";
 import { UserService } from "../services/user-service";
-import { keycloak } from "../utils/keycloak-setup";
 
 export const userRoute = Router();
 userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {
@@ -10,7 +10,6 @@ userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {
 }));
 
 userRoute.post("/", asyncHandler(async (req: Request, res: Response) => {
-  const { userId, username } = req.body;
-  const newUser = await UserService.createUser({ userId, username });
-  res.json({ newUser });
+  const data = await UserService.createUser(req.body);
+  res.status(data.code).json(_.omit(data, ["code"]));
 }));
