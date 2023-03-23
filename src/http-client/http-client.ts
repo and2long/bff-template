@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { KEYCLOAK_BASE_URL } from "../utils/keycloak-setup";
 
-export const keycloakApiClient = axios.create(
+export const keycloakApiClient: AxiosInstance = axios.create(
   {
     baseURL: KEYCLOAK_BASE_URL,
     timeout: 1000,

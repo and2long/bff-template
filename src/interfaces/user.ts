@@ -1,5 +1,3 @@
-import { HTTPStatusCode } from "../constants/http-response";
-
 export interface UserCreationPayload {
   userId: string;
   username: string;
@@ -11,7 +9,5 @@ export interface UserCreationRequest {
 }
 
 export interface KeycloakUserCreationResponse {
-  code: HTTPStatusCode;
-  userId?: string;
-  errorMessage?: string;
+  userId: string;
 }
