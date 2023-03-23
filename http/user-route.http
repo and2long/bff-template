@@ -1,0 +1,12 @@
+### create new user
+POST {{base_url_bff}}/api/users
+Content-Type: application/json
+
+{
+  "username": "and2long",
+  "password": "000000"
+}
+
+### get users
+GET {{base_url_bff}}/api/users
+Authorization: Bearer {{access_token}}
