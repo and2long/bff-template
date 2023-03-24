@@ -199,6 +199,7 @@ export default {
     "<rootDir>/src/seeders/",
     "<rootDir>/src/constants/",
   ],
+  setupFilesAfterEnv: [ "<rootDir>/__tests__/setup.ts" ],
   coverageThreshold: {
     global: {
       branches: 89,
