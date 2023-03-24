@@ -6,10 +6,24 @@ export class BaseError extends Error {
   readonly status: number;
   readonly type: ApiErrorType;
 
-  constructor(message: string, status: number, type: ApiErrorType, id?: string) {
-    super(message);
+  constructor(status: number, type: ApiErrorType, message: string | undefined, id = "") {
+    super(message || "");
     this.id = id || uuidv4();
     this.status = status;
     this.type = type;
+    Object.defineProperty(this, "id", {
+      writable: false,
+    });
+    Object.defineProperty(this, "message", {
+      enumerable: true,
+      writable: false,
+    });
+    Object.defineProperty(this, "status", {
+      enumerable: false,
+      writable: false,
+    });
+    Object.defineProperty(this, "type", {
+      writable: false,
+    });
   }
 }

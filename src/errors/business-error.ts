@@ -5,7 +5,7 @@ export class BusinessError extends BaseError {
   readonly code: string;
 
   constructor(message: string, code: string, id?: string) {
-    super(message, 400, ApiErrorType.business, id);
+    super(400, ApiErrorType.business, message, id);
     this.code = code;
   }
 }
