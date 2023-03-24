@@ -1,5 +1,5 @@
-import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from 'sequelize-typescript';
-import Doctor from './doctor';
+import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from "sequelize-typescript";
+import Doctor from "./doctor";
 
 @Table
 export default class Department extends Model {

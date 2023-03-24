@@ -14,4 +14,4 @@ export const DoctorLevelDTOMapper: DataTransferObjectMapper<DoctorLevelDTO, Doct
     };
     return basic as DoctorLevelDTO;
   }
-}
+};

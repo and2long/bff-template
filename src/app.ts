@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import express, { Express, Request, Response, Router } from 'express';
+import express, { Express, Request, Response, Router } from "express";
 import session from "express-session";
 import { departmentRoute } from "./routes/department-route";
 import { doctorLevelRoute } from "./routes/doctor-level-route";
@@ -7,7 +7,7 @@ import { doctorRoute } from "./routes/doctor-route";
 import { hospitalRoute } from "./routes/hospital-route";
 import { userRoute } from "./routes/user-route";
 import { keycloak, memoryStore } from "./utils/keycloak-setup";
-import { httpRequestLogger, httpResponseLogger } from './utils/loggers';
+import { httpRequestLogger, httpResponseLogger } from "./utils/loggers";
 import { errorHandler } from "./errors/error-handler";
 
 export const app: Express = express();
@@ -20,7 +20,7 @@ app.use(httpResponseLogger);
 // configing a web session store, make it accessible in the browser.
 app.use(
   session({
-    secret: 'mySecret',
+    secret: "mySecret",
     resave: false,
     saveUninitialized: true,
     store: memoryStore,
@@ -28,8 +28,8 @@ app.use(
 );
 app.use(keycloak.middleware());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, this is Express + TypeScript');
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello, this is Express + TypeScript");
 });
 
 const apiRouter = Router();

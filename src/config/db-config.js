@@ -14,5 +14,5 @@ const dbConfig = {
     useUTC: false
   },
   logging: false
-}
-module.exports = dbConfig
+};
+module.exports = dbConfig;

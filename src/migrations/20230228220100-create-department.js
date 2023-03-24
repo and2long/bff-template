@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Departments', {
+    return queryInterface.createTable("Departments", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -14,17 +14,17 @@ module.exports = {
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn("NOW")
       },
     });
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('Departments');
+    return queryInterface.dropTable("Departments");
   }
 };

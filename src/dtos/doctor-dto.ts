@@ -24,4 +24,4 @@ export const DoctorDTOMapper: DataTransferObjectMapper<DoctorDTO, Doctor> = {
     };
     return basic as DoctorDTO;
   }
-}
+};

@@ -1,7 +1,6 @@
-
-import session from 'express-session';
-import Keycloak from 'keycloak-connect';
-import envConfig from '../config/env-config';
+import session from "express-session";
+import Keycloak from "keycloak-connect";
+import envConfig from "../config/env-config";
 
 export const KEYCLOAK_REALM = "qunai";
 export const KEYCLOAK_CLIENT_ID = "qunai-medical";

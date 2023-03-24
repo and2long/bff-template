@@ -21,4 +21,4 @@ export const HospitalDTOMapper: DataTransferObjectMapper<HospitalDTO, Hospital> 
     };
     return basic as HospitalDTO;
   }
-}
+};

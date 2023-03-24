@@ -1,5 +1,5 @@
-import { app } from './app';
-import { setupDB } from './utils/db-setup';
+import { app } from "./app";
+import { setupDB } from "./utils/db-setup";
 
 setupDB();
 

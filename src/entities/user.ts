@@ -1,5 +1,5 @@
-import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from 'sequelize-typescript';
-import { Gender } from '../constants/gender';
+import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { Gender } from "../constants/gender";
 
 @Table
 export default class User extends Model {

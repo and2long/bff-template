@@ -1,5 +1,5 @@
 import { UserDTO } from "../dtos/user-dto";
-import { UserCreationResponse, UserCreationRequest } from "../interfaces/user";
+import { UserCreationRequest, UserCreationResponse } from "../interfaces/user";
 import userRepository from "../repositoris/user-repository";
 import { keycloakApiClient } from "../http-client/http-client";
 import { KEYCLOAK_CLIENT_ID, KEYCLOAK_REALM } from "../utils/keycloak-setup";
@@ -28,7 +28,7 @@ const getAccessToken = async (): Promise<string> => {
     return data.access_token;
   }
   throw new TechnicalError("Failed to retrieve access_token.");
-}
+};
 
 const createKeycloakUser = async (payload: UserCreationRequest): Promise<UserCreationResponse> => {
   const accessToken = await getAccessToken();
@@ -45,7 +45,7 @@ const createKeycloakUser = async (payload: UserCreationRequest): Promise<UserCre
       ]
     }, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         "Authorization": `Bearer ${accessToken}`
       }
     });
@@ -54,13 +54,14 @@ const createKeycloakUser = async (payload: UserCreationRequest): Promise<UserCre
     return { userId };
   } catch (e) {
     const error = e as unknown as AxiosError;
-    console.log(`createKeycloakUser returned status code: ${error.response?.status} and response: ${stringify(error.response?.data)}`)
+    console.log(`createKeycloakUser returned status code: ${error.response?.status} and response: ${stringify(error.response?.data)}`);
     if (error.response?.status === HTTPStatusCode.CONFLICT) {
       throw new BusinessError("User exists with same username", UserErrorCode.USERNAME_ALREADY_EXISTS);
     }
     throw new TechnicalError("Failed to create keycloak user");
   }
-}
+};
+
 const createUser = async (payload: UserCreationRequest): Promise<UserCreationResponse> => {
   // create a keycloak user.
   const response = await createKeycloakUser(payload);
@@ -74,4 +75,4 @@ export const UserService = {
   createUser,
   getAccessToken,
   createKeycloakUser
-}
+};

@@ -22,4 +22,4 @@ export const UserDTOMapper: DataTransferObjectMapper<UserDTO, User> = {
     };
     return basic as UserDTO;
   }
-}
+};

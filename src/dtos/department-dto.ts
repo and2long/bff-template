@@ -17,4 +17,4 @@ export const DepartmentDTOMapper: DataTransferObjectMapper<DepartmentDTO, Depart
     };
     return basic as DepartmentDTO;
   }
-}
+};

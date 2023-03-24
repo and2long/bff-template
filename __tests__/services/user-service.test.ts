@@ -106,15 +106,16 @@ describe("UserService", () => {
           } ], "enabled": true, "username": "zhangSan"
         }, { "headers": { "Authorization": "Bearer mock access token", "Content-Type": "application/json" } });
         expect(createKeycloakUserSpy).toHaveBeenCalledWith(payload);
-        expect(result).toEqual({ userId: userIdMock })
+        expect(result).toEqual({ userId: userIdMock });
       });
 
       test("should throw business error when username is exists", async () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const response: AxiosResponse = {
-          data: { errorMessage: 'User exists with same username' },
+          data: { errorMessage: "User exists with same username" },
           status: 409,
-        }
+        };
         const apiClientSpy = jest.spyOn(keycloakApiClient, "post")
           .mockResolvedValueOnce({
             status: HTTPStatusCode.OK,
@@ -140,11 +141,12 @@ describe("UserService", () => {
       });
 
       test("should throw tech error when access_token expired", async () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const response: AxiosResponse = {
-          data: { error: 'HTTP 401 Unauthorized' },
+          data: { error: "HTTP 401 Unauthorized" },
           status: 401,
-        }
+        };
         const apiClientSpy = jest.spyOn(keycloakApiClient, "post")
           .mockResolvedValueOnce({
             status: HTTPStatusCode.OK,

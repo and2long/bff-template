@@ -1,7 +1,7 @@
-import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from 'sequelize-typescript';
-import Department from './department';
-import DoctorLevel from './doctor-level';
-import Hospital from './hospital';
+import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, UpdatedAt } from "sequelize-typescript";
+import Department from "./department";
+import DoctorLevel from "./doctor-level";
+import Hospital from "./hospital";
 
 @Table
 export default class Doctor extends Model {
