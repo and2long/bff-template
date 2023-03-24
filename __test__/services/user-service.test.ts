@@ -1,5 +1,5 @@
 import { keycloakApiClient } from "../../src/http-client/http-client";
-import { HTTPStatusCode } from "../../src/constants/http-response";
+import { HTTPStatusCode } from "../../src/constants/http-status-code";
 import { TechnicalError } from "../../src/errors/technical-error";
 import { UserCreationRequest } from "../../src/interfaces/user";
 import { UserService } from "../../src/services/user-service";
@@ -7,6 +7,7 @@ import { KEYCLOAK_REALM } from "../../src/utils/keycloak-setup";
 import { BusinessError } from "../../src/errors/business-error";
 import { UserErrorCode } from "../../src/constants/error-codes";
 import envConfig from "../../src/config/env-config";
+import { AxiosError, AxiosResponse } from "axios";
 
 describe("UserService", () => {
   const accessTokenMock = "mock access token";
@@ -109,6 +110,11 @@ describe("UserService", () => {
       });
 
       test("should throw business error when username is exists", async () => {
+        // @ts-ignore
+        const response: AxiosResponse = {
+          data: { errorMessage: 'User exists with same username' },
+          status: 409,
+        }
         const apiClientSpy = jest.spyOn(keycloakApiClient, "post")
           .mockResolvedValueOnce({
             status: HTTPStatusCode.OK,
@@ -116,11 +122,11 @@ describe("UserService", () => {
               "access_token": accessTokenMock
             }
           })
-          .mockResolvedValueOnce({
-            status: HTTPStatusCode.CONFLICT,
-          });
+          .mockRejectedValueOnce(
+            new AxiosError(undefined, undefined, undefined, undefined, response)
+          );
         await expect(UserService.createKeycloakUser(payload)).rejects.toThrow(
-          new BusinessError("username already exists.", UserErrorCode.USERNAME_ALREADY_EXISTS)
+          new BusinessError("User exists with same username", UserErrorCode.USERNAME_ALREADY_EXISTS)
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
         expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
@@ -134,6 +140,11 @@ describe("UserService", () => {
       });
 
       test("should throw tech error when access_token expired", async () => {
+        // @ts-ignore
+        const response: AxiosResponse = {
+          data: { error: 'HTTP 401 Unauthorized' },
+          status: 401,
+        }
         const apiClientSpy = jest.spyOn(keycloakApiClient, "post")
           .mockResolvedValueOnce({
             status: HTTPStatusCode.OK,
@@ -141,11 +152,11 @@ describe("UserService", () => {
               "access_token": accessTokenMock
             }
           })
-          .mockResolvedValueOnce({
-            status: HTTPStatusCode.UNAUTHORIZED,
-          });
+          .mockRejectedValueOnce(
+            new AxiosError(undefined, undefined, undefined, undefined, response)
+          );
         await expect(UserService.createKeycloakUser(payload)).rejects.toThrow(
-          new TechnicalError("Failed to create keycloak user.")
+          new TechnicalError("Failed to create keycloak user")
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
         expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {

@@ -8,6 +8,6 @@ export interface UserCreationRequest {
   password: string;
 }
 
-export interface KeycloakUserCreationResponse {
+export interface UserCreationResponse {
   userId: string;
 }
