@@ -19,3 +19,20 @@ grant_type=refresh_token&refresh_token={{refresh_token}}&client_id={{client_id}}
 client.global.set("access_token", response.body.access_token);
 client.global.set("refresh_token", response.body.refresh_token);
 %}
+
+### create keycloak user
+POST {{base_url_keycloak}}/admin/realms/{{realm}}/users
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "enabled": true,
+  "username": "username",
+  "credentials": [
+    {
+      "type": "password",
+      "value": "password",
+      "temporary": false
+    }
+  ]
+}
