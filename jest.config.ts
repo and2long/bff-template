@@ -195,6 +195,9 @@ export default {
   collectCoverageFrom: [ "./src/**", "!./src/**/*.json" ],
   coveragePathIgnorePatterns: [
     "<rootDir>/src/server.ts",
+    "<rootDir>/src/migrations/",
+    "<rootDir>/src/seeders/",
+    "<rootDir>/src/constants/",
   ],
   coverageThreshold: {
     global: {
