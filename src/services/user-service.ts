@@ -65,7 +65,7 @@ const createUser = async (payload: UserCreationRequest): Promise<UserCreationRes
   // create a keycloak user.
   const response = await createKeycloakUser(payload);
   // create a qunai user.
-  await userRepository.createUser({ userId: response.userId, username: payload.username });
+  await userRepository.createOrUpdateUser({ userId: response.userId, username: payload.username });
   return response;
 };
 
