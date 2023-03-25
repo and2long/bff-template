@@ -1,4 +1,4 @@
-### get access token
+### get login access token
 POST {{base_url_keycloak}}/realms/{{realm}}/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -20,10 +20,20 @@ client.global.set("access_token", response.body.access_token);
 client.global.set("refresh_token", response.body.refresh_token);
 %}
 
+### get access token for crete keycloak user
+POST {{base_url_keycloak}}/realms/{{realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials
+
+> {%
+client.global.set("access_token_for_create_user", response.body.access_token);
+%}
+
 ### create keycloak user
 POST {{base_url_keycloak}}/admin/realms/{{realm}}/users
 Content-Type: application/json
-Authorization: Bearer {{access_token}}
+Authorization: Bearer {{access_token_for_create_user}}
 
 {
   "enabled": true,
