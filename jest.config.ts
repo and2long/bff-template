@@ -202,10 +202,16 @@ export default {
   setupFilesAfterEnv: [ "<rootDir>/__tests__/setup.ts" ],
   coverageThreshold: {
     global: {
-      branches: 89,
+      branches: 90,
       functions: 90,
       lines: 90,
       statements: 90
     }
   },
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/coverage/",
+    "<rootDir>/dist/",
+    "<rootDir>/__tests__/setup.ts",
+  ],
 };
