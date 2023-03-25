@@ -23,6 +23,14 @@ start-dev \
 --db-password=password \
 --hostname=localhost
 ```
+## setup keycloak
+1. create new realm
+2. create new client
+3. set Valid redirect URIs: `http://localhost:3000/*` for client
+   - `Clients` -> `Client details` -> `Settings` -> `Valid redirect URIs`
+4. assign `manage-users` role to client
+   - `Clients` -> `Client details` -> `Service accounts roles` -> `Assign role`
+
 ## initial db for this project
 `npm run setup-database`
 ## start server
