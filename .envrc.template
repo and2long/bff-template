@@ -1,2 +1,4 @@
 export NODE_ENV=development
 export KEYCLOAK_CLIENT_SECRET=REPLACE_ME
+export DB_HOST=localhost
+export KEYCLOAK_HOST=localhost

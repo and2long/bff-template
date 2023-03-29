@@ -1,6 +1,6 @@
 const dbConfig = {
   username: "postgres",
-  host: "localhost",
+  host: process.env.DB_HOST,
   port: "5432",
   password: "password",
   database: "qunai",
