@@ -35,3 +35,18 @@ start-dev \
 `npm run setup-database`
 ## start server
 `npm run dev`
+
+# build qunai-bff image
+`docker build . -t qunai-bff:0.0.1`
+
+## run qunai-bff container
+```
+docker run -itd \
+--name qunai-bff \
+-p 3000:3000 \
+-e NODE_ENV=dev \
+-e KEYCLOAK_CLIENT_SECRET=REPLACE_ME \
+-e DB_HOST=host.docker.internal \
+-e KEYCLOAK_HOST=host.docker.internal \
+qunai-bff:0.0.1
+```
