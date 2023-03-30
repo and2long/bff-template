@@ -1,5 +1,5 @@
 import { DepartmentDTO, DepartmentDTOMapper } from "../dtos/department-dto";
-import Department from "../entities/department";
+import Department from "../sequelize/entities/department";
 
 class DepartmentRepository {
   public async findAll(): Promise<DepartmentDTO[]> {

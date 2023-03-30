@@ -2,22 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Doctors", {
+    return queryInterface.createTable("AppointmentDepartments", {
       id: {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
-        type: Sequelize.UUID,
-        unique: true,
-        allowNull: false
-      },
-      introduction: { type: Sequelize.STRING, allowNull: true },
-      hospitalId: { type: Sequelize.INTEGER, allowNull: false },
-      departmentId: {type: Sequelize.INTEGER, allowNull: false },
-      levelId: { type: Sequelize.INTEGER, allowNull: false },
+      departmentId: { type: Sequelize.INTEGER, allowNull: false },
+      appointmentId: { type: Sequelize.INTEGER, allowNull: false },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -32,6 +25,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable("Doctors");
+    return queryInterface.dropTable("AppointmentDepartments");
   }
 };

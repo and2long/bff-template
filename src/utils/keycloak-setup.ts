@@ -4,7 +4,7 @@ import envConfig from "../config/env-config";
 
 export const KEYCLOAK_REALM = "qunai";
 export const KEYCLOAK_CLIENT_ID = "qunai-medical";
-export const KEYCLOAK_BASE_URL = `http://${process.env.KEYCLOAK_HOST}:8080`;
+export const KEYCLOAK_BASE_URL = `${process.env.KEYCLOAK_HOST}:8080`;
 
 const kcConfig = {
   "realm": KEYCLOAK_REALM,

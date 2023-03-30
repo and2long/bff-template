@@ -1,5 +1,5 @@
 import { UserDTO, UserDTOMapper } from "../dtos/user-dto";
-import User from "../entities/user";
+import User from "../sequelize/entities/user";
 import { UserCreationPayload } from "../interfaces/user";
 import { TechnicalError } from "../errors/technical-error";
 

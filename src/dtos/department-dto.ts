@@ -1,5 +1,5 @@
 import { isNil, omitBy } from "lodash";
-import Department from "../entities/department";
+import Department from "../sequelize/entities/department";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
 export interface DepartmentDTO {

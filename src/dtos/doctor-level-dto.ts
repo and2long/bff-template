@@ -1,5 +1,5 @@
 import { omitBy, isNil } from "lodash";
-import DoctorLevel from "../entities/doctor-level";
+import DoctorLevel from "../sequelize/entities/doctor-level";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
 export interface DoctorLevelDTO {

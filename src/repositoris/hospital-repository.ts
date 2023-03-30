@@ -1,5 +1,5 @@
 import { HospitalDTO, HospitalDTOMapper } from "../dtos/hospital-dto";
-import Hospital from "../entities/hospital";
+import Hospital from "../sequelize/entities/hospital";
 
 class HospitalRepository {
   public async findAll(): Promise<HospitalDTO[]> {

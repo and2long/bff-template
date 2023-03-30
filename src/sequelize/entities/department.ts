@@ -1,5 +1,7 @@
-import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { BelongsToMany, Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from "sequelize-typescript";
 import Doctor from "./doctor";
+import Appointment from "./appointment";
+import AppointmentDepartment from "./appointment-department";
 
 @Table
 export default class Department extends Model {
@@ -26,4 +28,7 @@ export default class Department extends Model {
 
   @HasMany(() => Doctor)
   doctors!: Doctor[];
+
+  @BelongsToMany(() => Appointment, () => AppointmentDepartment)
+  appointments!: Appointment[];
 }

@@ -1,8 +1,8 @@
 import { DoctorDTO, DoctorDTOMapper } from "../dtos/doctor-dto";
-import Department from "../entities/department";
-import Doctor from "../entities/doctor";
-import DoctorLevel from "../entities/doctor-level";
-import Hospital from "../entities/hospital";
+import Department from "../sequelize/entities/department";
+import Doctor from "../sequelize/entities/doctor";
+import DoctorLevel from "../sequelize/entities/doctor-level";
+import Hospital from "../sequelize/entities/hospital";
 
 class DoctorRepository {
   public async findAll(): Promise<DoctorDTO[]> {

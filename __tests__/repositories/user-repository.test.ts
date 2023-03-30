@@ -1,6 +1,6 @@
 import userRepository from "../../src/repositoris/user-repository";
 import { Gender } from "../../src/constants/gender";
-import User from "../../src/entities/user";
+import User from "../../src/sequelize/entities/user";
 
 describe("UserRepository", () => {
   const userId = "";

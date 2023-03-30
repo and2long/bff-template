@@ -1,5 +1,5 @@
 import { omitBy, isNil } from "lodash";
-import Hospital from "../entities/hospital";
+import Hospital from "../sequelize/entities/hospital";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
 export interface HospitalDTO {

@@ -1,6 +1,6 @@
 import { omitBy, isNil } from "lodash";
 import { Gender } from "../constants/gender";
-import User from "../entities/user";
+import User from "../sequelize/entities/user";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
 
