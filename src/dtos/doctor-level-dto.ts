@@ -1,3 +1,4 @@
+import { omitBy, isNil } from "lodash";
 import DoctorLevel from "../entities/doctor-level";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
@@ -12,6 +13,6 @@ export const DoctorLevelDTOMapper: DataTransferObjectMapper<DoctorLevelDTO, Doct
       id: item.id,
       name: item.name,
     };
-    return basic as DoctorLevelDTO;
+    return omitBy(basic, isNil) as unknown  as DoctorLevelDTO;
   }
 };

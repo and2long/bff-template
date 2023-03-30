@@ -1,3 +1,4 @@
+import { isNil, omitBy } from "lodash";
 import Department from "../entities/department";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
@@ -15,6 +16,6 @@ export const DepartmentDTOMapper: DataTransferObjectMapper<DepartmentDTO, Depart
       name: item.name,
       introduction: item.introduction,
     };
-    return basic as DepartmentDTO;
+    return omitBy(basic, isNil) as unknown  as DepartmentDTO;
   }
 };

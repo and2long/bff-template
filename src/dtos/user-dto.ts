@@ -1,3 +1,4 @@
+import { omitBy, isNil } from "lodash";
 import { Gender } from "../constants/gender";
 import User from "../entities/user";
 import { DataTransferObjectMapper } from "./dto-mapper";
@@ -20,6 +21,6 @@ export const UserDTOMapper: DataTransferObjectMapper<UserDTO, User> = {
       phoneNumber: item.phoneNumber,
       introduction: item.introduction,
     };
-    return basic as UserDTO;
+    return omitBy(basic, isNil) as unknown  as UserDTO;
   }
 };

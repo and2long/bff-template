@@ -1,3 +1,4 @@
+import { omitBy, isNil } from "lodash";
 import Hospital from "../entities/hospital";
 import { DataTransferObjectMapper } from "./dto-mapper";
 
@@ -19,6 +20,6 @@ export const HospitalDTOMapper: DataTransferObjectMapper<HospitalDTO, Hospital> 
       latLong: item.latLong,
       introduction: item.introduction,
     };
-    return basic as HospitalDTO;
+    return omitBy(basic, isNil) as unknown  as HospitalDTO;
   }
 };
