@@ -10,7 +10,6 @@ import {
   UpdatedAt
 } from "sequelize-typescript";
 import User from "./user";
-import AppointmentUser from "./appointment-user";
 import Department from "./department";
 import AppointmentDepartment from "./appointment-department";
 
@@ -26,13 +25,10 @@ export default class Appointment extends Model {
   id!: number;
 
   @ForeignKey(() => User)
-  @Column({
-    allowNull: false,
-    type: DataType.UUID,
-  })
-  creatorId!: string;
+  @Column({ allowNull: false, type: DataType.INTEGER })
+  creatorId!: number;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, "creatorId")
   creator!: User;
 
   @Column({ allowNull: false })
@@ -47,8 +43,8 @@ export default class Appointment extends Model {
   @CreatedAt
   createdAt!: Date;
 
-  @BelongsToMany(() => User, () => AppointmentUser)
-  participants!: User[];
+  // @BelongsToMany(() => User, () => AppointmentUser)
+  // participants!: User[];
 
   @BelongsToMany(() => Department, () => AppointmentDepartment)
   departments!: Department[];

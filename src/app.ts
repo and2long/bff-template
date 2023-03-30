@@ -9,6 +9,7 @@ import { userRoute } from "./routes/user-route";
 import { keycloak, memoryStore } from "./utils/keycloak-setup";
 import { httpRequestLogger, httpResponseLogger } from "./utils/loggers";
 import { errorHandler } from "./errors/error-handler";
+import { appointmentRoute } from "./routes/appointment-route";
 
 export const app: Express = express();
 // parse application/x-www-form-urlencoded
@@ -39,5 +40,6 @@ apiRouter.use("/departments", departmentRoute);
 apiRouter.use("/doctors", doctorRoute);
 apiRouter.use("/doctor-levels", doctorLevelRoute);
 apiRouter.use("/hospitals", hospitalRoute);
+apiRouter.use("/appointments", appointmentRoute);
 
 app.use(errorHandler);

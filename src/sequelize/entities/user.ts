@@ -50,7 +50,7 @@ export default class User extends Model {
   @CreatedAt
   createdAt!: Date;
 
-  @HasMany(() => Appointment)
+  @HasMany(() => Appointment, "creatorId")
   appointmentsCreated!: Appointment[];
 
   @BelongsToMany(() => Appointment, () => AppointmentUser)

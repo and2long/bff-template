@@ -1,0 +1,12 @@
+### create new appointment
+POST {{base_url_bff}}/api/appointments
+Content-Type: application/json
+
+{
+  "creatorId": "1",
+  "title": "标题",
+  "introduction": "内容"
+}
+
+### get users
+GET {{base_url_bff}}/api/appointments
