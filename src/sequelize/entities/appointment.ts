@@ -25,8 +25,8 @@ export default class Appointment extends Model {
   id!: number;
 
   @ForeignKey(() => User)
-  @Column({ allowNull: false, type: DataType.INTEGER })
-  creatorId!: number;
+  @Column({ allowNull: false, type: DataType.UUID })
+  creatorId!: string;
 
   @BelongsTo(() => User, "creatorId")
   creator!: User;

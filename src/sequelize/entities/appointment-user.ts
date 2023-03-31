@@ -6,7 +6,7 @@ import Appointment from "./appointment";
 export default class AppointmentUser extends Model {
   @ForeignKey(() => User)
   @Column
-  userId!: number;
+  userId!: string;
 
   @ForeignKey(() => Appointment)
   @Column

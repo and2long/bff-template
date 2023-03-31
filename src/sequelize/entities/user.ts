@@ -7,17 +7,10 @@ import AppointmentUser from "./appointment-user";
 export default class User extends Model {
 
   @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  })
-  id!: number;
-
-  @Column({
     allowNull: false,
     type: DataType.UUID,
-    unique: true
+    unique: true,
+    primaryKey: true
   })
   userId!: string;
 

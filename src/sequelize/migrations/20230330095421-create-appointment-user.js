@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      userId: { type: Sequelize.INTEGER, allowNull: false },
+      userId: { type: Sequelize.UUID, allowNull: false },
       appointmentId: { type: Sequelize.INTEGER, allowNull: false },
       createdAt: {
         type: Sequelize.DATE,
