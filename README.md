@@ -18,7 +18,7 @@ docker run -itd \
 quay.io/keycloak/keycloak:latest \
 start-dev \
 --db=postgres \
---db-url=jdbc:postgresql://postgres:5432/keycloakdb \
+--db-url=jdbc:postgresql://host.docker.internal:5432/keycloakdb \
 --db-username=postgres \
 --db-password=password \
 --hostname=localhost
