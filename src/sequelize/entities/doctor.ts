@@ -2,6 +2,7 @@ import { BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, Table, Updat
 import Department from "./department";
 import DoctorLevel from "./doctor-level";
 import Hospital from "./hospital";
+import User from "./user";
 
 @Table
 export default class Doctor extends Model {
@@ -14,12 +15,16 @@ export default class Doctor extends Model {
   })
   id!: number;
 
+  @ForeignKey(() => User)
   @Column({
     allowNull: false,
     type: DataType.UUID,
     unique: true
   })
   userId!: string;
+
+  @BelongsTo(() => User)
+  user!: User;
 
   @Column
   introduction?: string;

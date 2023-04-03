@@ -4,9 +4,10 @@ import { DepartmentDTO, DepartmentDTOMapper } from "./department-dto";
 import { DoctorLevelDTO, DoctorLevelDTOMapper } from "./doctor-level-dto";
 import { DataTransferObjectMapper } from "./dto-mapper";
 import { HospitalDTO, HospitalDTOMapper } from "./hospital-dto";
+import { UserDTO, UserDTOMapper } from "./user-dto";
 
 export interface DoctorDTO {
-  userId: string;
+  user: UserDTO;
   introduction?: string;
   hospital: HospitalDTO;
   department: DepartmentDTO;
@@ -17,7 +18,7 @@ export interface DoctorDTO {
 export const DoctorDTOMapper: DataTransferObjectMapper<DoctorDTO, Doctor> = {
   mapToDTO: (item: Doctor) => {
     const basic = {
-      userId: item.userId,
+      user: UserDTOMapper.mapToDTO(item.user),
       introduction: item.introduction,
       hospital: HospitalDTOMapper.mapToDTO(item.hospital),
       department: DepartmentDTOMapper.mapToDTO(item.department),
