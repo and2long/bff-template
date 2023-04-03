@@ -10,8 +10,10 @@ import { keycloak, memoryStore } from "./utils/keycloak-setup";
 import { httpRequestLogger, httpResponseLogger } from "./utils/loggers";
 import { errorHandler } from "./errors/error-handler";
 import { appointmentRoute } from "./routes/appointment-route";
+import cors from "cors";
 
 export const app: Express = express();
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
