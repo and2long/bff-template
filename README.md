@@ -26,7 +26,7 @@ start-dev \
 ## setup keycloak
 1. create new realm
 2. create new client
-3. set Valid redirect URIs: `http://localhost:3000/*` for client
+3. set Valid redirect URIs: `http://localhost:3001/*` for client
    - `Clients` -> `Client details` -> `Settings` -> `Valid redirect URIs`
 4. assign `manage-users` role to client
    - `Clients` -> `Client details` -> `Service accounts roles` -> `Assign role`
@@ -43,7 +43,7 @@ start-dev \
 ```
 docker run -itd \
 --name qunai-bff \
--p 3000:3000 \
+-p 3001:3001 \
 -e NODE_ENV=dev \
 -e KEYCLOAK_CLIENT_SECRET=REPLACE_ME \
 -e DB_HOST=host.docker.internal \
