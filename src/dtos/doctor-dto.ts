@@ -1,29 +1,32 @@
 import { isNil, omitBy } from "lodash";
+import { Gender } from "../constants/gender";
 import Doctor from "../sequelize/entities/doctor";
-import { DepartmentDTO, DepartmentDTOMapper } from "./department-dto";
-import { DoctorLevelDTO, DoctorLevelDTOMapper } from "./doctor-level-dto";
 import { DataTransferObjectMapper } from "./dto-mapper";
-import { HospitalDTO, HospitalDTOMapper } from "./hospital-dto";
-import { UserDTO, UserDTOMapper } from "./user-dto";
 
 export interface DoctorDTO {
-  user: UserDTO;
+  userId: string,
+  username: string,
+  gender: Gender,
+  hospitalName: string;
+  departmentName: string;
+  levelName: string;
+  phoneNumber?: string;
   introduction?: string;
-  hospital: HospitalDTO;
-  department: DepartmentDTO;
-  level: DoctorLevelDTO;
 }
 
 
 export const DoctorDTOMapper: DataTransferObjectMapper<DoctorDTO, Doctor> = {
   mapToDTO: (item: Doctor) => {
     const basic = {
-      user: UserDTOMapper.mapToDTO(item.user),
+      userId: item.user.userId,
+      username: item.user.username,
+      gender: item.user.gender,
+      phoneNumber: item.user.phoneNumber,
       introduction: item.introduction,
-      hospital: HospitalDTOMapper.mapToDTO(item.hospital),
-      department: DepartmentDTOMapper.mapToDTO(item.department),
-      level: DoctorLevelDTOMapper.mapToDTO(item.level),
+      hospitalName: item.hospital.name,
+      departmentName: item.department.name,
+      levelName: item.level.name,
     };
-    return omitBy(basic, isNil) as unknown  as DoctorDTO;
+    return omitBy(basic, isNil) as unknown as DoctorDTO;
   }
 };
