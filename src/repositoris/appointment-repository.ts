@@ -13,8 +13,8 @@ class AppointmentRepository {
 
   public async create(payload: AppointmentCreationPayload): Promise<number> {
     try {
-      const { title, introduction } = payload;
-      const item = await Appointment.create({ title, introduction });
+      const { creatorId, title, introduction } = payload;
+      const item = await Appointment.create({ creatorId, title, introduction });
       return item.id;
     } catch (e) {
       console.log("Failed to write appointment into DB due to error: ", e);
