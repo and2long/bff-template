@@ -195,9 +195,9 @@ export default {
   collectCoverageFrom: [ "./src/**", "!./src/**/*.json" ],
   coveragePathIgnorePatterns: [
     "<rootDir>/src/server.ts",
-    "<rootDir>/src/migrations/",
-    "<rootDir>/src/seeders/",
     "<rootDir>/src/constants/",
+    "<rootDir>/src/sequelize/migrations/",
+    "<rootDir>/src/sequelize/seeders/",
   ],
   setupFilesAfterEnv: [ "<rootDir>/__tests__/setup.ts" ],
   coverageThreshold: {
