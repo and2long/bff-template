@@ -21,7 +21,9 @@ module.exports = {
         defaultValue: Sequelize.fn("NOW")
       },
       title: { type: Sequelize.STRING, allowNull: false },
-      introduction: { type: Sequelize.STRING, allowNull: false }
+      introduction: { type: Sequelize.STRING, allowNull: false },
+      startTime: { type: Sequelize.DATE, allowNull: false },
+      endTime: { type: Sequelize.DATE, allowNull: false },
     });
   },
 

@@ -37,6 +37,12 @@ export default class Appointment extends Model {
   @Column({ allowNull: false })
   introduction?: string;
 
+  @Column({ allowNull: false })
+  startTime!: Date;
+
+  @Column({ allowNull: false })
+  endTime!: Date;
+
   @UpdatedAt
   updatedAt!: Date;
 

@@ -1,16 +1,18 @@
 import { isNil, omitBy } from "lodash";
-import { DataTransferObjectMapper } from "./dto-mapper";
 import Appointment from "../sequelize/entities/appointment";
-import { UserDTO, UserDTOMapper } from "./user-dto";
-import { DepartmentDTO, DepartmentDTOMapper } from "./department-dto";
 import Department from "../sequelize/entities/department";
+import { DataTransferObjectMapper } from "./dto-mapper";
+import { UserDTO, UserDTOMapper } from "./user-dto";
 
 export interface AppointmentDTO {
   creator: UserDTO;
   title: string;
   introduction: string;
+  startTime: string;
+  endTime: string;
+  createdAt: string;
   participants: UserDTO[];
-  departments: DepartmentDTO[];
+  departmentNames: string[];
 }
 
 export const AppointmentDTOMapper: DataTransferObjectMapper<AppointmentDTO, Appointment> = {
@@ -19,8 +21,11 @@ export const AppointmentDTOMapper: DataTransferObjectMapper<AppointmentDTO, Appo
       creator: UserDTOMapper.mapToDTO(item.creator),
       title: item.title,
       introduction: item.introduction,
+      startTime: item.startTime,
+      endTime: item.endTime,
+      createdAt: item.createdAt,
       // participants: item.participants.map((user: User) => UserDTOMapper.mapToDTO(user)),
-      departments: item.departments.map((department: Department) => DepartmentDTOMapper.mapToDTO(department))
+      departmentNames: item.departments.map((department: Department) => department.name)
     };
     return omitBy(basic, isNil) as unknown as AppointmentDTO;
   }
