@@ -1,5 +1,5 @@
 export interface AppointmentCreationPayload {
-  creatorId: number,
+  creatorId: string,
   title: string,
   introduction: string,
   departmentIds: number[],
