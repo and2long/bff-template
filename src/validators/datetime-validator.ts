@@ -1,8 +1,7 @@
 import { body, ValidationChain } from "express-validator";
+import { INVALID_TYPE_MSG, MISSING_PARAM_MSG } from "./constants";
 
-const MISSING_PARAM_MSG = "Missing parameter.";
-const INVALID_TYPE_MSG = "Invalid parameter type";
 export const datetimeRule = (param: string): ValidationChain => body(param)
   .exists().withMessage(MISSING_PARAM_MSG)
-  .isDate().withMessage(INVALID_TYPE_MSG)
-  .bail();
+  .bail()
+  .isDate().withMessage(INVALID_TYPE_MSG);

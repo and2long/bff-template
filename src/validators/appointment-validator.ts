@@ -2,21 +2,20 @@ import { body, ValidationChain } from "express-validator";
 import { titleRule } from "./title-validator";
 import { introductionRule } from "./introduction-validator";
 import { datetimeRule } from "./datetime-validator";
+import { EMPTY_PARAM_MSG, MISSING_PARAM_MSG, NOT_ARRAY_PARAM_MSG, NOT_NUMBER_ELEMENT_MSG } from "./constants";
 
 const departmentIds = "departmentIds";
 const startTime = "startTime";
 const endTime = "endTime";
 
-const MISSING_DEPARTMENT_IDS_PARAM_MSG = "Missing departmentIds parameter";
-const INVALID_TYPE_MSG = "Invalid parameter type";
-const NOT_ARRAY_MSG = "departmentIds is not array";
-
 const departmentIdsRule = body(departmentIds)
-  .exists().withMessage(MISSING_DEPARTMENT_IDS_PARAM_MSG)
-  .isArray().withMessage(NOT_ARRAY_MSG)
-  .notEmpty()
-  .custom((value: []) => value.every(Number.isInteger)).withMessage(INVALID_TYPE_MSG)
-  .bail();
+  .exists().withMessage(MISSING_PARAM_MSG)
+  .bail()
+  .isArray().withMessage(NOT_ARRAY_PARAM_MSG)
+  .bail()
+  .notEmpty().withMessage(EMPTY_PARAM_MSG)
+  .bail()
+  .custom((value: []) => value.every(Number.isInteger)).withMessage(NOT_NUMBER_ELEMENT_MSG);
 
 export const createAppointmentRules: ValidationChain[] = [
   titleRule,

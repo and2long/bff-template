@@ -1,9 +1,8 @@
-import { ValidationChain, body } from "express-validator";
+import { body, ValidationChain } from "express-validator";
+import { EMPTY_PARAM_MSG, MISSING_PARAM_MSG } from "./constants";
 
 const INTRODUCTION = "introduction";
-const MISSING_PARAM_MSG = "Missing introduction parameter.";
 export const introductionRule: ValidationChain = body(INTRODUCTION)
-  .exists()
-  .withMessage(MISSING_PARAM_MSG)
-  .notEmpty()
-  .bail();
+  .exists().withMessage(MISSING_PARAM_MSG)
+  .bail()
+  .notEmpty().withMessage(EMPTY_PARAM_MSG);

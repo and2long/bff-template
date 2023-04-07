@@ -48,7 +48,23 @@ describe("appointmentRoute", () => {
 
       it("should fail validation when payload is empty", async () => {
         await request(app).post(url).send({}).expect(HTTPStatusCode.BAD_REQUEST)
-          .expect({});
+          .expect({
+            errors: [
+              { msg: "Missing parameter", param: "title", location: "body" },
+              {
+                msg: "Missing parameter",
+                param: "introduction",
+                location: "body"
+              },
+              { msg: "Missing parameter", param: "startTime", location: "body" },
+              { msg: "Missing parameter", param: "endTime", location: "body" },
+              {
+                msg: "Missing parameter",
+                param: "departmentIds",
+                location: "body"
+              }
+            ]
+          });
       });
     });
   });
