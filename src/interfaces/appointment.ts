@@ -6,3 +6,7 @@ export interface AppointmentCreationPayload {
   startTime: string,
   endTime: string,
 }
+
+export interface AppointmentCreationResponse {
+  appointmentId: number;
+}
