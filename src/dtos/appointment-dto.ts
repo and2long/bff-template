@@ -3,6 +3,7 @@ import Appointment from "../sequelize/entities/appointment";
 import Department from "../sequelize/entities/department";
 import { DataTransferObjectMapper } from "./dto-mapper";
 import { UserDTO, UserDTOMapper } from "./user-dto";
+import AppointmentParticipant from "../sequelize/entities/appointment-participant";
 
 export interface AppointmentDTO {
   creator: UserDTO;
@@ -24,7 +25,8 @@ export const AppointmentDTOMapper: DataTransferObjectMapper<AppointmentDTO, Appo
       startTime: item.startTime,
       endTime: item.endTime,
       createdAt: item.createdAt,
-      // participants: item.participants.map((user: User) => UserDTOMapper.mapToDTO(user)),
+      participants:
+        item.participants.map((participant: AppointmentParticipant) => UserDTOMapper.mapToDTO(participant.participant)),
       departmentNames: item.departments.map((department: Department) => department.name)
     };
     return omitBy(basic, isNil) as unknown as AppointmentDTO;

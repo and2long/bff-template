@@ -2,15 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("AppointmentUsers", {
+    return queryInterface.createTable("AppointmentParticipants", {
       id: {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      userId: { type: Sequelize.UUID, allowNull: false },
-      appointmentId: { type: Sequelize.INTEGER, allowNull: false },
+      participantId: {type: Sequelize.UUID, allowNull: false},
+      appointmentId: {type: Sequelize.INTEGER, allowNull: false},
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -25,6 +25,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable("AppointmentUsers");
+    return queryInterface.dropTable("AppointmentParticipants");
   }
 };

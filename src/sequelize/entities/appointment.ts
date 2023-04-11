@@ -5,6 +5,7 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
   UpdatedAt
@@ -12,6 +13,7 @@ import {
 import User from "./user";
 import Department from "./department";
 import AppointmentDepartment from "./appointment-department";
+import AppointmentParticipant from "./appointment-participant";
 
 @Table
 export default class Appointment extends Model {
@@ -49,8 +51,8 @@ export default class Appointment extends Model {
   @CreatedAt
   createdAt!: Date;
 
-  // @BelongsToMany(() => User, () => AppointmentUser)
-  // participants!: User[];
+  @HasMany(() => AppointmentParticipant, "appointmentId")
+  participants!: AppointmentParticipant[];
 
   @BelongsToMany(() => Department, () => AppointmentDepartment)
   departments!: Department[];
