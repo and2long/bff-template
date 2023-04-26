@@ -4,6 +4,7 @@ import { HTTPStatusCode } from "../../src/constants/http-status-code";
 import { AppointmentService } from "../../src/services/appointment-service";
 import * as CommonUtils from "../../src/utils/common";
 import { protectRouteSpy } from "../setup";
+import { ApiErrorType } from "../../src/errors/api-error-type";
 
 describe("appointmentRoute", () => {
   const url = "/api/appointments";
@@ -35,24 +36,16 @@ describe("appointmentRoute", () => {
       });
 
       it("should fail validation when payload is empty", async () => {
-        await request(app).post(url).send({}).expect(HTTPStatusCode.BAD_REQUEST)
-          .expect({
-            errors: [
-              { msg: "Missing parameter", param: "title", location: "body" },
-              {
-                msg: "Missing parameter",
-                param: "introduction",
-                location: "body"
-              },
-              { msg: "Missing parameter", param: "startTime", location: "body" },
-              { msg: "Missing parameter", param: "endTime", location: "body" },
-              {
-                msg: "Missing parameter",
-                param: "departmentIds",
-                location: "body"
-              }
-            ]
-          });
+        const response = await request(app).post(url).send({});
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "title", reason: "Missing parameter" },
+          { name: "introduction", reason: "Missing parameter" },
+          { name: "startTime", reason: "Missing parameter" },
+          { name: "endTime", reason: "Missing parameter" },
+          { name: "departmentIds", reason: "Missing parameter" },
+        ]);
       });
     });
   });

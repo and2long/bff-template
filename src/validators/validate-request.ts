@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ValidationChain, validationResult } from "express-validator";
+import { ValidationError } from "../errors/validation-error";
+import { HTTPStatusCode } from "../constants/http-status-code";
 
 export const validateRequest = (validations: ValidationChain[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -10,6 +12,9 @@ export const validateRequest = (validations: ValidationChain[]) => {
       return next();
     }
 
-    res.status(400).json({ errors: errors.array() });
+    const invalidParams = errors.array().map((item: any) => {
+      return { name: item.param, reason: item.msg };
+    });
+    res.status(HTTPStatusCode.BAD_REQUEST).json(new ValidationError(invalidParams));
   };
 };
