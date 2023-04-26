@@ -47,6 +47,69 @@ describe("appointmentRoute", () => {
           { name: "departmentIds", reason: "Missing parameter" },
         ]);
       });
+
+      it("should fail validation when title is empty", async () => {
+        const response = await request(app).post(url).send({ ...payload, title: "" });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "title", reason: "The parameter cannot be empty" }
+        ]);
+      });
+
+      it("should fail validation when introduction is empty", async () => {
+        const response = await request(app).post(url).send({ ...payload, introduction: "" });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "introduction", reason: "The parameter cannot be empty" }
+        ]);
+      });
+
+      it("should fail validation when startTime is not ISO8601 format", async () => {
+        const response = await request(app).post(url).send({ ...payload, startTime: "" });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "startTime", reason: "Invalid parameter type" }
+        ]);
+      });
+
+      it("should fail validation when endTime is not ISO8601 format", async () => {
+        const response = await request(app).post(url).send({ ...payload, endTime: "" });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "endTime", reason: "Invalid parameter type" }
+        ]);
+      });
+
+      it("should fail validation when departmentIds is not array", async () => {
+        const response = await request(app).post(url).send({ ...payload, departmentIds: "" });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "departmentIds", reason: "The parameter must be Array" }
+        ]);
+      });
+
+      it("should fail validation when departmentIds is empty array", async () => {
+        const response = await request(app).post(url).send({ ...payload, departmentIds: [] });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "departmentIds", reason: "The parameter cannot be empty" }
+        ]);
+      });
+
+      it("should fail validation when element of departmentIds is not number", async () => {
+        const response = await request(app).post(url).send({ ...payload, departmentIds: [ "1" ] });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "departmentIds", reason: "Array element must be Number" }
+        ]);
+      });
     });
   });
 });
