@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "dev:debug": "ts-node-dev --respawn --transpile-only --inspect=9229 src/server.ts",
     "setup-database": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "migrate-database": "sequelize db:migrate",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx 'src/' '__tests__/'",
