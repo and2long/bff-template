@@ -5,6 +5,8 @@ import { AppointmentService } from "../../src/services/appointment-service";
 import * as CommonUtils from "../../src/utils/common";
 import { protectRouteSpy } from "../setup";
 import { ApiErrorType } from "../../src/errors/api-error-type";
+import { AppointmentDTO } from "../../src/dtos/appointment-dto";
+import { Gender } from "../../src/constants/gender";
 
 describe("appointmentRoute", () => {
   const url = "/api/appointments";
@@ -13,9 +15,31 @@ describe("appointmentRoute", () => {
   const departmentIds = [ 1, 2 ];
   const startTime = "2023-04-07T17:00:00+08:00";
   const endTime = "2023-04-07T17:30:00+08:00";
+  const createdAt = "2023-04-07T17:30:00+08:00";
   const userId = "5e51c943-213e-4f1e-907b-1b076f784268";
   const payload = { title, introduction, departmentIds, startTime, endTime };
   const mockAppointmentCreationResponse = { appointmentId: 1 };
+  const creator = { userId, username: "mock user name", gender: Gender.FAMALE };
+  const appointmentDTO: AppointmentDTO = {
+    creator,
+    title,
+    introduction,
+    startTime,
+    endTime,
+    createdAt,
+    departmentNames: [ "外科" ],
+    participants: [ creator ],
+  };
+
+  describe("GET / - get appointment list", () => {
+    test("should get appointment list by call appointment service", async () => {
+      const findAllSpy = jest.spyOn(AppointmentService, "findAll").mockResolvedValue([ appointmentDTO ]);
+      const response = await request(app).get(url);
+      expect(findAllSpy).toHaveBeenCalled();
+      expect(response.status).toBe(200);
+      expect(response.body.data).toEqual([ appointmentDTO ]);
+    });
+  });
 
   describe("POST / - create appointment", () => {
 
