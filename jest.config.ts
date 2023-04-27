@@ -198,6 +198,7 @@ export default {
     "<rootDir>/src/constants/",
     "<rootDir>/src/sequelize/migrations/",
     "<rootDir>/src/sequelize/seeders/",
+    "<rootDir>/src/dtos/dto-mapper.ts",
   ],
   setupFilesAfterEnv: [ "<rootDir>/__tests__/setup.ts" ],
   coverageThreshold: {
