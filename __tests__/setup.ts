@@ -12,7 +12,8 @@ jest.mock("keycloak-connect", () => {
       protect: () => (req: Request, res: Response, next: NextFunction) => {
         protectRouteSpy();
         next();
-      }
+      },
+      getGrant: Promise.resolve({})
     };
   });
 });

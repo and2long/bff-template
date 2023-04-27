@@ -5,12 +5,8 @@ import { Sequelize } from "sequelize-typescript";
 const dbConfig = require("../config/db-config.js");
 export const sequelize = new Sequelize(dbConfig);
 const entityPath = path.resolve(__dirname, "../sequelize/entities");
-sequelize.addModels([entityPath]);
+sequelize.addModels([ entityPath ]);
 
 export const setupDB = async () => {
-  try {
-    await sequelize.authenticate();
-  } catch (error) {
-    console.log("db connect error: ", error);
-  }
+  await sequelize.authenticate();
 };
