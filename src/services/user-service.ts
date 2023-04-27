@@ -6,7 +6,6 @@ import { KEYCLOAK_CLIENT_ID, KEYCLOAK_REALM } from "../utils/keycloak-setup";
 import envConfig from "../config/env-config";
 import { HTTPStatusCode } from "../constants/http-status-code";
 import { TechnicalError } from "../errors/technical-error";
-import stringify from "fast-safe-stringify";
 import { BusinessError } from "../errors/business-error";
 import { UserErrorCode } from "../constants/error-codes";
 import { AxiosError } from "axios";
@@ -54,7 +53,6 @@ const createKeycloakUser = async (payload: UserCreationRequest): Promise<UserCre
     return { userId };
   } catch (e) {
     const error = e as unknown as AxiosError;
-    console.log(`createKeycloakUser returned status code: ${error.response?.status} and response: ${stringify(error.response?.data)}`);
     if (error.response?.status === HTTPStatusCode.CONFLICT) {
       throw new BusinessError("User exists with same username", UserErrorCode.USERNAME_ALREADY_EXISTS);
     }

@@ -7,7 +7,8 @@ const findAll = async (): Promise<AppointmentDTO[]> => {
 };
 
 const createAppointment = async (payload: AppointmentCreationPayload): Promise<AppointmentCreationResponse> => {
-  return appointmentRepository.create(payload);
+  const appointment = await appointmentRepository.create(payload);
+  return { appointmentId: appointment.id };
 };
 
 

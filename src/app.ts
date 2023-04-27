@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import express, { Express, Request, Response, Router } from "express";
+import express, { Express, Router } from "express";
 import session from "express-session";
 import { departmentRoute } from "./routes/department-route";
 import { doctorLevelRoute } from "./routes/doctor-level-route";
@@ -30,10 +30,6 @@ app.use(
   })
 );
 app.use(keycloak.middleware());
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, this is Express + TypeScript");
-});
 
 const apiRouter = Router();
 app.use("/api", apiRouter);

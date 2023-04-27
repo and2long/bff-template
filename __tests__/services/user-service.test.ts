@@ -8,11 +8,24 @@ import { BusinessError } from "../../src/errors/business-error";
 import { UserErrorCode } from "../../src/constants/error-codes";
 import envConfig from "../../src/config/env-config";
 import { AxiosError, AxiosResponse } from "axios";
+import userRepository from "../../src/repositoris/user-repository";
 
 describe("UserService", () => {
   const accessTokenMock = "mock access token";
   const userIdMock = "mock user id";
   const clientSecret = envConfig.keycloakClientSecret;
+  const payload: UserCreationRequest = {
+    username: "zhangSan",
+    password: "password"
+  };
+
+  describe("findAll", () => {
+    test("should call findAll of userRepository", async () => {
+      const findAllSpy = jest.spyOn(userRepository, "findAll");
+      await UserService.findAll();
+      expect(findAllSpy).toHaveBeenCalled();
+    });
+  });
 
   describe("getAccessToken", () => {
     test("should return access token when request success", async () => {
@@ -54,12 +67,7 @@ describe("UserService", () => {
     });
   });
 
-
   describe("createKeycloakUser", () => {
-    const payload: UserCreationRequest = {
-      username: "zhangSan",
-      password: "password"
-    };
     const createKeycloakUserSpy = jest.spyOn(UserService, "createKeycloakUser");
 
     describe("with getAccessToken failure", () => {
@@ -170,6 +178,30 @@ describe("UserService", () => {
         }, { "headers": { "Authorization": "Bearer mock access token", "Content-Type": "application/json" } });
         expect(createKeycloakUserSpy).toHaveBeenCalledWith(payload);
       });
+    });
+  });
+
+  describe("createUser", () => {
+    test("should invoke createKeycloakUser and createOrUpdateUser", async () => {
+      const apiClientSpy = jest.spyOn(keycloakApiClient, "post")
+        .mockResolvedValueOnce(
+          {
+            status: HTTPStatusCode.OK,
+            data: {
+              "access_token": accessTokenMock
+            }
+          }
+        )
+        .mockResolvedValueOnce({
+          status: HTTPStatusCode.CREATED,
+          headers: {
+            "location": `http://keycloak_address/auth/admin/realms/realm/users/${userIdMock}`
+          }
+        });
+      const createOrUpdateUserSpy = jest.spyOn(userRepository, "createOrUpdateUser").mockResolvedValue(userIdMock);
+      await UserService.createUser(payload);
+      expect(apiClientSpy).toHaveBeenCalledTimes(2);
+      expect(createOrUpdateUserSpy).toHaveBeenCalled();
     });
   });
 });
