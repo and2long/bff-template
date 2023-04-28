@@ -16,12 +16,15 @@ class AppointmentRepository {
   }
 
   public async create(payload: AppointmentCreationPayload): Promise<Appointment> {
-    const { creatorId, title, introduction, departmentIds, startTime, endTime } = payload;
-    const item = await Appointment.create({ creatorId, title, introduction, startTime, endTime });
-    for (let i = 0; i < departmentIds.length; i++) {
-      await AppointmentDepartment.create({ appointmentId: item.id, departmentId: departmentIds[i] });
+    const { creatorId, title, introduction, departmentIds, participantIds, startTime, endTime } = payload;
+    const appointment = await Appointment.create({ creatorId, title, introduction, startTime, endTime });
+    for (const id of departmentIds) {
+      await AppointmentDepartment.create({ appointmentId: appointment.id, departmentId: id });
     }
-    return item;
+    for (const id of participantIds) {
+      await AppointmentParticipant.create({ appointmentId: appointment.id, participantId: id });
+    }
+    return appointment;
   }
 }
 

@@ -134,6 +134,29 @@ describe("appointmentRoute", () => {
           { name: "departmentIds", reason: "Array element must be Number" }
         ]);
       });
+
+      it.each(
+        [ "abc", 123 ]
+      )("should fail validation when participantIds %s is not array", async (value) => {
+        const response = await request(app).post(url).send({ ...payload, participantIds: value });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "participantIds", reason: "The parameter must be Array" }
+        ]);
+      });
+
+      it.each([
+        [ [ "abc" ] ],
+        [ [ 123 ] ]
+      ])("should fail validation when element of departmentIds %s is not uuid", async (value) => {
+        const response = await request(app).post(url).send({ ...payload, participantIds: value });
+        expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
+        expect(response.body.type).toBe(ApiErrorType.validation);
+        expect(response.body.invalidParams).toEqual([
+          { name: "participantIds", reason: "Array element must be uuid" }
+        ]);
+      });
     });
   });
 });

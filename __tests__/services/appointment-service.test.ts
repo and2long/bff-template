@@ -10,6 +10,7 @@ describe("appointment-service", () => {
   const endTime = "2023-04-07T17:30:00+08:00";
   const department = { id: 1, name: "外科" };
   const departmentIds = [ department.id ];
+  const participantIds = [ userId ];
 
   describe("findAll", () => {
     test("should call findAll of appointmentRepository", async () => {
@@ -22,7 +23,7 @@ describe("appointment-service", () => {
   describe("createAppointment", () => {
     const payload: AppointmentCreationPayload = {
       creatorId: userId,
-      title, introduction, departmentIds, startTime, endTime
+      title, introduction, departmentIds, participantIds, startTime, endTime
     };
 
     test("should call create of appointmentRepository", async () => {

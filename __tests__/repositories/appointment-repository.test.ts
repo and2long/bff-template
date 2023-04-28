@@ -21,6 +21,7 @@ describe("AppointmentRepository", () => {
   const appointmentParticipants = [ { participant: creator } ];
   const department = { id: 1, name: "外科" };
   const departmentIds = [ department.id ];
+  const participantIds = [ userId ];
   const departmentNames = [ department.name ];
   const appointment = {
     creator,
@@ -56,22 +57,28 @@ describe("AppointmentRepository", () => {
   describe("createAppointment", () => {
     const payload: AppointmentCreationPayload = {
       creatorId: userId,
-      title, introduction, departmentIds, startTime, endTime
+      title, introduction, departmentIds, participantIds, startTime, endTime
     };
     let appointmentCreated: Appointment;
     let appointmentDepartments: AppointmentDepartment[];
+    let appointmentParticipants: AppointmentParticipant[];
 
     afterEach(() => {
       Appointment.destroy({ where: { id: appointmentCreated.id } });
       for (const item of appointmentDepartments) {
         AppointmentDepartment.destroy({ where: { id: item.id } });
       }
+      for (const item of appointmentParticipants) {
+        AppointmentParticipant.destroy({ where: { id: item.id } });
+      }
     });
 
     test("should create successfully with given data", async () => {
       appointmentCreated = await appointmentRepository.create(payload);
       appointmentDepartments = await AppointmentDepartment.findAll({ where: { appointmentId: appointmentCreated.id } });
+      appointmentParticipants = await AppointmentParticipant.findAll({ where: { appointmentId: appointmentCreated.id } });
       const relatedDepartmentIds = appointmentDepartments.map((item: AppointmentDepartment) => item.departmentId);
+      const relatedParticipantIds = appointmentParticipants.map((item: AppointmentParticipant) => item.participantId);
       expect(appointmentCreated).not.toBeNull();
       expect(appointmentCreated?.creatorId).toEqual(userId);
       expect(appointmentCreated?.title).toEqual(title);
@@ -79,6 +86,7 @@ describe("AppointmentRepository", () => {
       expect(new Date(appointmentCreated?.startTime)).toEqual(new Date(startTime));
       expect(new Date(appointmentCreated?.endTime)).toEqual(new Date(endTime));
       expect(relatedDepartmentIds).toEqual(departmentIds);
+      expect(relatedParticipantIds).toEqual(participantIds);
     });
   });
 });
