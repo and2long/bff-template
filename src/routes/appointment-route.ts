@@ -18,13 +18,14 @@ appointmentRoute.post("/",
   keycloak.protect(),
   validateRequest(createAppointmentRules),
   asyncHandler(async (req: Request, res: Response) => {
-    const { title, introduction, departmentIds, startTime, endTime } = req.body;
+    const { title, introduction, departmentIds, participantIds, startTime, endTime } = req.body;
     const creatorId = await getUserId(req, res);
     const payload: AppointmentCreationPayload = {
       creatorId,
       title,
       introduction,
       departmentIds,
+      participantIds,
       startTime,
       endTime,
     };

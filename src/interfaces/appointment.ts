@@ -3,6 +3,7 @@ export interface AppointmentCreationPayload {
   title: string,
   introduction: string,
   departmentIds: number[],
+  participantIds: string[],
   startTime: string,
   endTime: string,
 }
