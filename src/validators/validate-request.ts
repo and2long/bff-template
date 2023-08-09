@@ -1,7 +1,6 @@
+import { HTTPStatusCode, ValidationError } from "@and2long/lib-commons";
 import { NextFunction, Request, Response } from "express";
 import { ValidationChain, validationResult } from "express-validator";
-import { ValidationError } from "../errors/validation-error";
-import { HTTPStatusCode } from "../constants/http-status-code";
 
 export const validateRequest = (validations: ValidationChain[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {

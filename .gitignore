@@ -10,3 +10,5 @@ dist/**/*
 .envrc
 .idea/
 .vscode
+package-lock.json
+yarn.lock

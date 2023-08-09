@@ -1,18 +1,17 @@
 import request from "supertest";
 import { app } from "../../src/app";
-import { HTTPStatusCode } from "../../src/constants/http-status-code";
 import { AppointmentService } from "../../src/services/appointment-service";
 import * as CommonUtils from "../../src/utils/common";
 import { protectRouteSpy } from "../setup";
-import { ApiErrorType } from "../../src/errors/api-error-type";
 import { AppointmentDTO } from "../../src/dtos/appointment-dto";
 import { Gender } from "../../src/constants/gender";
+import { HTTPStatusCode, ApiErrorType } from "@and2long/lib-commons";
 
 describe("appointmentRoute", () => {
   const url = "/api/appointments";
   const title = "title";
   const introduction = "introduction";
-  const departmentIds = [ 1, 2 ];
+  const departmentIds = [1, 2];
   const startTime = "2023-04-07T17:00:00+08:00";
   const endTime = "2023-04-07T17:30:00+08:00";
   const createdAt = "2023-04-07T17:30:00+08:00";
@@ -27,17 +26,17 @@ describe("appointmentRoute", () => {
     startTime,
     endTime,
     createdAt,
-    departmentNames: [ "外科" ],
-    participants: [ creator ],
+    departmentNames: ["外科"],
+    participants: [creator],
   };
 
   describe("GET / - get appointment list", () => {
     test("should get appointment list by call appointment service", async () => {
-      const findAllSpy = jest.spyOn(AppointmentService, "findAll").mockResolvedValue([ appointmentDTO ]);
+      const findAllSpy = jest.spyOn(AppointmentService, "findAll").mockResolvedValue([appointmentDTO]);
       const response = await request(app).get(url);
       expect(findAllSpy).toHaveBeenCalled();
       expect(response.status).toBe(200);
-      expect(response.body.data).toEqual([ appointmentDTO ]);
+      expect(response.body.data).toEqual([appointmentDTO]);
     });
   });
 
@@ -127,7 +126,7 @@ describe("appointmentRoute", () => {
       });
 
       it("should fail validation when element of departmentIds is not number", async () => {
-        const response = await request(app).post(url).send({ ...payload, departmentIds: [ "1" ] });
+        const response = await request(app).post(url).send({ ...payload, departmentIds: ["1"] });
         expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
         expect(response.body.type).toBe(ApiErrorType.validation);
         expect(response.body.invalidParams).toEqual([
@@ -136,7 +135,7 @@ describe("appointmentRoute", () => {
       });
 
       it.each(
-        [ "abc", 123 ]
+        ["abc", 123]
       )("should fail validation when participantIds %s is not array", async (value) => {
         const response = await request(app).post(url).send({ ...payload, participantIds: value });
         expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);
@@ -147,8 +146,8 @@ describe("appointmentRoute", () => {
       });
 
       it.each([
-        [ [ "abc" ] ],
-        [ [ 123 ] ]
+        [["abc"]],
+        [[123]]
       ])("should fail validation when element of departmentIds %s is not uuid", async (value) => {
         const response = await request(app).post(url).send({ ...payload, participantIds: value });
         expect(response.status).toBe(HTTPStatusCode.BAD_REQUEST);

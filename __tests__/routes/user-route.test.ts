@@ -2,10 +2,9 @@ import { UserService } from "../../src/services/user-service";
 import { app } from "../../src/app";
 import { UserCreationRequest } from "../../src/interfaces/user";
 import request from "supertest";
-import { BusinessError } from "../../src/errors/business-error";
-import { HTTPStatusCode } from "../../src/constants/http-status-code";
 import { UserDTO } from "../../src/dtos/user-dto";
 import { Gender } from "../../src/constants/gender";
+import { BusinessError, HTTPStatusCode } from "@and2long/lib-commons";
 
 describe("userRoute", () => {
   const baseUrl = "/api/users";
@@ -25,11 +24,11 @@ describe("userRoute", () => {
 
   describe("GET / - get user list", () => {
     test("should get user list by call user service", async () => {
-      const findAllSpy = jest.spyOn(UserService, "findAll").mockResolvedValue([ user ]);
+      const findAllSpy = jest.spyOn(UserService, "findAll").mockResolvedValue([user]);
       const response = await request(app).get(baseUrl);
       expect(findAllSpy).toHaveBeenCalled();
       expect(response.status).toBe(200);
-      expect(response.body.data).toEqual([ user ]);
+      expect(response.body.data).toEqual([user]);
     });
   });
 

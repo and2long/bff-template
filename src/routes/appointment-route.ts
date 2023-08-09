@@ -1,12 +1,12 @@
 import { Request, Response, Router } from "express";
 import asyncHandler from "express-async-handler";
-import { HTTPStatusCode } from "../constants/http-status-code";
 import { AppointmentService } from "../services/appointment-service";
 import { keycloak } from "../utils/keycloak-setup";
 import { AppointmentCreationPayload } from "../interfaces/appointment";
 import { getUserId } from "../utils/common";
 import { validateRequest } from "../validators/validate-request";
 import { createAppointmentRules } from "../validators/appointment-validator";
+import { HTTPStatusCode } from "@and2long/lib-commons";
 
 export const appointmentRoute = Router();
 appointmentRoute.get("/", asyncHandler(async (req: Request, res: Response) => {

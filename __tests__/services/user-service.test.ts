@@ -1,14 +1,11 @@
-import { keycloakApiClient } from "../../src/http-client/http-client";
-import { HTTPStatusCode } from "../../src/constants/http-status-code";
-import { TechnicalError } from "../../src/errors/technical-error";
-import { UserCreationRequest } from "../../src/interfaces/user";
-import { UserService } from "../../src/services/user-service";
-import { KEYCLOAK_REALM } from "../../src/utils/keycloak-setup";
-import { BusinessError } from "../../src/errors/business-error";
-import { UserErrorCode } from "../../src/constants/error-codes";
-import envConfig from "../../src/config/env-config";
+import { BusinessError, HTTPStatusCode, TechnicalError } from "@and2long/lib-commons";
 import { AxiosError, AxiosResponse } from "axios";
+import envConfig from "../../src/config/env-config";
+import { UserErrorCode } from "../../src/constants/error-codes";
+import { keycloakApiClient } from "../../src/http-client/http-client";
+import { UserCreationRequest } from "../../src/interfaces/user";
 import userRepository from "../../src/repositoris/user-repository";
+import { UserService } from "../../src/services/user-service";
 
 describe("UserService", () => {
   const accessTokenMock = "mock access token";
@@ -37,7 +34,7 @@ describe("UserService", () => {
       });
       const result = await UserService.getAccessToken();
       expect(getAccessTokenSpy).toHaveBeenCalledWith(
-        `/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token`,
+        `/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`,
         {
           "client_id": "qunai-medical",
           "client_secret": clientSecret,
@@ -58,7 +55,7 @@ describe("UserService", () => {
         new TechnicalError("Failed to retrieve access_token.")
       );
       expect(getAccessTokenSpy).toHaveBeenCalledWith(
-        `/realms/${KEYCLOAK_REALM}/protocol/openid-connect/token`,
+        `/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`,
         {
           "client_id": "qunai-medical",
           "client_secret": clientSecret,
@@ -107,11 +104,11 @@ describe("UserService", () => {
         const result = await UserService.createKeycloakUser(payload);
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
         expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
-          "credentials": [ {
+          "credentials": [{
             "temporary": false,
             "type": "password",
             "value": "password"
-          } ], "enabled": true, "username": "zhangSan"
+          }], "enabled": true, "username": "zhangSan"
         }, { "headers": { "Authorization": "Bearer mock access token", "Content-Type": "application/json" } });
         expect(createKeycloakUserSpy).toHaveBeenCalledWith(payload);
         expect(result).toEqual({ userId: userIdMock });
@@ -139,11 +136,11 @@ describe("UserService", () => {
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
         expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
-          "credentials": [ {
+          "credentials": [{
             "temporary": false,
             "type": "password",
             "value": "password"
-          } ], "enabled": true, "username": "zhangSan"
+          }], "enabled": true, "username": "zhangSan"
         }, { "headers": { "Authorization": "Bearer mock access token", "Content-Type": "application/json" } });
         expect(createKeycloakUserSpy).toHaveBeenCalledWith(payload);
       });
@@ -170,11 +167,11 @@ describe("UserService", () => {
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
         expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
-          "credentials": [ {
+          "credentials": [{
             "temporary": false,
             "type": "password",
             "value": "password"
-          } ], "enabled": true, "username": "zhangSan"
+          }], "enabled": true, "username": "zhangSan"
         }, { "headers": { "Authorization": "Bearer mock access token", "Content-Type": "application/json" } });
         expect(createKeycloakUserSpy).toHaveBeenCalledWith(payload);
       });

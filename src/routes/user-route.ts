@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import asyncHandler from "express-async-handler";
 import { UserService } from "../services/user-service";
-import { HTTPStatusCode } from "../constants/http-status-code";
+import { HTTPStatusCode } from "@and2long/lib-commons";
 
 export const userRoute = Router();
 userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {

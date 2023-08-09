@@ -1,9 +1,7 @@
-import { ApiError } from "./error-response";
 import { NextFunction, Request, Response } from "express";
 import { serializeError } from "./error-serializer";
-import { ApiErrorType } from "./api-error-type";
-import { TechnicalError } from "./technical-error";
-import { BusinessError } from "./business-error";
+import { ApiError, ApiErrorType, BusinessError, TechnicalError } from "@and2long/lib-commons";
+import envConfig from "../config/env-config";
 
 export const errorHandler = (
   err: Error,
@@ -27,7 +25,7 @@ const isUnhandledBadRequestError = (err: any): boolean => {
 
 const transformToApiError = (err: any): ApiError => {
   if (isTechnicalOrUnknownError(err)) {
-    return new TechnicalError();
+    return new TechnicalError(err);
   }
 
   if (isUnhandledBadRequestError(err)) {

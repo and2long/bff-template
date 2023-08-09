@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { keycloak } from "./keycloak-setup";
-import { TechnicalError } from "../errors/technical-error";
+import { TechnicalError } from "@and2long/lib-commons";
 
 export const getUserId = async (req: Request, res: Response): Promise<string> => {
   try {

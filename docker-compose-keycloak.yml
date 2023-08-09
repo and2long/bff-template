@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-1
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://host.docker.internal:5432/keycloakdb
+      - KC_DB_USERNAME=postgres
+      - KC_DB_PASSWORD=password
+      - KC_HOSTNAME=localhost
+    depends_on:
+      - postgres
+    command:
+      - start-dev
+
+  postgres:
+    image: postgres
+    container_name: postgres-1
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=keycloakdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
+    name: db_data

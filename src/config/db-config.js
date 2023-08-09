@@ -3,7 +3,7 @@ const dbConfig = {
   host: process.env.DB_HOST,
   port: "5432",
   password: "password",
-  database: "qunai",
+  database: process.env.DB_NAME,
   dialect: "postgres",
   pool: {
     min: 10,
