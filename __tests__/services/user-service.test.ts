@@ -36,7 +36,7 @@ describe("UserService", () => {
       expect(getAccessTokenSpy).toHaveBeenCalledWith(
         `/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`,
         {
-          "client_id": "qunai-medical",
+          "client_id": "my-realm-app1",
           "client_secret": clientSecret,
           "grant_type": "client_credentials"
         });
@@ -57,7 +57,7 @@ describe("UserService", () => {
       expect(getAccessTokenSpy).toHaveBeenCalledWith(
         `/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`,
         {
-          "client_id": "qunai-medical",
+          "client_id": "my-realm-app1",
           "client_secret": clientSecret,
           "grant_type": "client_credentials"
         });
@@ -103,7 +103,7 @@ describe("UserService", () => {
           });
         const result = await UserService.createKeycloakUser(payload);
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
-        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
+        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/my-realm/users", {
           "credentials": [{
             "temporary": false,
             "type": "password",
@@ -135,7 +135,7 @@ describe("UserService", () => {
           new BusinessError("User exists with same username", UserErrorCode.USERNAME_ALREADY_EXISTS)
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
-        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
+        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/my-realm/users", {
           "credentials": [{
             "temporary": false,
             "type": "password",
@@ -166,7 +166,7 @@ describe("UserService", () => {
           new TechnicalError("Failed to create keycloak user")
         );
         expect(apiClientSpy).toHaveBeenCalledTimes(2);
-        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/qunai/users", {
+        expect(apiClientSpy).toHaveBeenLastCalledWith("/admin/realms/my-realm/users", {
           "credentials": [{
             "temporary": false,
             "type": "password",
