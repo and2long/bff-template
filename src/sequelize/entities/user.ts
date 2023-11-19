@@ -1,7 +1,5 @@
-import { Column, CreatedAt, DataType, HasMany, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { Column, CreatedAt, DataType, Model, Table, UpdatedAt } from "sequelize-typescript";
 import { Gender } from "../../constants/gender";
-import Appointment from "./appointment";
-import AppointmentParticipant from "./appointment-participant";
 
 @Table
 export default class User extends Model {
@@ -42,10 +40,4 @@ export default class User extends Model {
 
   @CreatedAt
   createdAt!: Date;
-
-  @HasMany(() => Appointment, "creatorId")
-  createdAppointments!: Appointment[];
-
-  @HasMany(() => AppointmentParticipant, "participantId")
-  participatedAppointments!: AppointmentParticipant[];
 }

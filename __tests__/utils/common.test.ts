@@ -1,5 +1,5 @@
-import { keycloak } from "../../src/utils/keycloak-setup";
 import { getUserId } from "../../src/utils/common";
+import { keycloak } from "../../src/utils/keycloak-setup";
 
 describe("common", () => {
   describe("getUserId", () => {

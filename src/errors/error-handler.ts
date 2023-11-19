@@ -1,13 +1,11 @@
-import { NextFunction, Request, Response } from "express";
-import { serializeError } from "./error-serializer";
 import { ApiError, ApiErrorType, BusinessError, TechnicalError } from "@and2long/lib-commons";
-import envConfig from "../config/env-config";
+import { Request, Response } from "express";
+import { serializeError } from "./error-serializer";
 
 export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction,
 ): void => {
   const apiError: ApiError = transformToApiError(err);
   res.status(apiError.status);

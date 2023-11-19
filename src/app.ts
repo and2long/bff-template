@@ -1,15 +1,10 @@
 import bodyParser from "body-parser";
 import express, { Express, Router } from "express";
 import session from "express-session";
-import { departmentRoute } from "./routes/department-route";
-import { doctorLevelRoute } from "./routes/doctor-level-route";
-import { doctorRoute } from "./routes/doctor-route";
-import { hospitalRoute } from "./routes/hospital-route";
 import { userRoute } from "./routes/user-route";
 import { keycloak, memoryStore } from "./utils/keycloak-setup";
 import { httpRequestLogger, httpResponseLogger } from "./utils/loggers";
 import { errorHandler } from "./errors/error-handler";
-import { appointmentRoute } from "./routes/appointment-route";
 import cors from "cors";
 
 export const app: Express = express();
@@ -34,10 +29,5 @@ app.use(keycloak.middleware());
 const apiRouter = Router();
 app.use("/api", apiRouter);
 apiRouter.use("/users", userRoute);
-apiRouter.use("/departments", departmentRoute);
-apiRouter.use("/doctors", doctorRoute);
-apiRouter.use("/doctor-levels", doctorLevelRoute);
-apiRouter.use("/hospitals", hospitalRoute);
-apiRouter.use("/appointments", appointmentRoute);
 
 app.use(errorHandler);
