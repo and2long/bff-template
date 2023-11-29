@@ -28,6 +28,7 @@
     "fast-safe-stringify": "^2.1.1",
     "keycloak-connect": "^21.0.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.29.0",

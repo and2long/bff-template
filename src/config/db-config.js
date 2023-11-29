@@ -9,9 +9,10 @@ const dbConfig = {
     min: 10,
     max: 30
   },
-  // timezone: require("moment")().format("Z"),
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  timezone: require("moment")().format("Z"),
   dialectOptions: {
-    useUTC: false
+    useUTC: true
   },
   logging: false
 };
