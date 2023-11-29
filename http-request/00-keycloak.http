@@ -24,3 +24,7 @@ Authorization: Bearer {{admin_access_token}}
     }
   ]
 }
+
+### send-verify-email
+PUT {{base_url_keycloak}}/admin/realms/{{realm}}/users/{{user_id}}/send-verify-email
+Authorization: Bearer {{admin_access_token}}
