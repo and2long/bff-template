@@ -5,8 +5,8 @@
 - Run command `docker-compose -f docker-compose-keycloak.yml up`
 
 3. Config Keycloak
-- create new realm named `my-realm`
-- create new client with Client ID: `my-realm-app1`, and enable `Client authentication`
+- create new realm named `myrealm`
+- create new client with Client ID: `myrealm-app1`, and enable `Client authentication`
 - set `Valid redirect URIs`: `http://localhost:3000/*`
 - Find `KEYCLOAK_CLIENT_SECRET` value in client adaptor config and set environment variable.
 
