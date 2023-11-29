@@ -28,7 +28,7 @@ describe("userRoute", () => {
       const response = await request(app).get(baseUrl);
       expect(findAllSpy).toHaveBeenCalled();
       expect(response.status).toBe(200);
-      expect(response.body.data).toEqual([user]);
+      expect(response.body).toEqual([user]);
     });
   });
 

@@ -6,17 +6,18 @@ describe("UserRepository", () => {
   const username = "zhangSan";
   const gender = Gender.MALE;
   const mockUserId = "5e51c943-213e-4f1e-907b-1b076f784268";
-  const user = { userId: mockUserId, username, gender };
+  const mockUser = { userId: mockUserId, username, gender };
 
-  afterEach(async () => {
-    jest.resetAllMocks();
+  beforeEach(async () => {
+    jest.restoreAllMocks();
     await User.destroy({ where: { userId: mockUserId } });
   });
 
   test("should return all users", async () => {
-    jest.spyOn(User, "findAll").mockResolvedValue([ user as any ]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(User, "findAll").mockResolvedValue([mockUser as any]);
     const result = await userRepository.findAll();
-    expect(result).toEqual([ user ]);
+    expect(result).toEqual([mockUser]);
   });
 
   describe("createOrUpdateUser", () => {
@@ -34,6 +35,7 @@ describe("UserRepository", () => {
       await User.create({ userId: mockUserId, username });
       const userExisting = await User.findOne({ where: { userId: mockUserId } });
       expect(userExisting).not.toBeNull();
+      expect(userExisting?.userId).toEqual(mockUserId);
       const newUserName = "new user name";
       const userId = await userRepository.createOrUpdateUser({ userId: mockUserId, username: newUserName });
       const userUpdated = await User.findOne({ where: { userId: mockUserId } });
