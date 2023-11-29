@@ -12,16 +12,28 @@ const findAll = async (): Promise<UserDTO[]> => {
 };
 
 const getAccessToken = async (): Promise<string> => {
-  const {
-    data,
-    status
-  } = await keycloakApiClient.post(`/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`, {
-    "client_id": envConfig.keycloakClientId,
-    "client_secret": envConfig.keycloakClientSecret,
-    "grant_type": "client_credentials",
-  });
-  if (status === HTTPStatusCode.OK) {
-    return data.access_token;
+  try {
+    const params = {
+      "client_id": envConfig.keycloakClientId,
+      "client_secret": envConfig.keycloakClientSecret,
+      "grant_type": "client_credentials",
+    };
+    const {
+      data,
+      status
+    } = await keycloakApiClient.post(`/realms/${envConfig.keycloakRealm}/protocol/openid-connect/token`, params);
+    if (status === HTTPStatusCode.OK) {
+      return data.access_token;
+    }
+  } catch (e) {
+    const error = e as unknown as AxiosError;
+    if (error.response?.status === HTTPStatusCode.UNAUTHORIZED) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      throw new TechnicalError(JSON.stringify({
+        "code": error.response?.status,
+        "data": error.response?.data
+      }));
+    }
   }
   throw new TechnicalError("Failed to retrieve access_token.");
 };
@@ -52,6 +64,12 @@ const createKeycloakUser = async (payload: UserCreationRequest): Promise<UserCre
     const error = e as unknown as AxiosError;
     if (error.response?.status === HTTPStatusCode.CONFLICT) {
       throw new BusinessError("User exists with same username", UserErrorCode.USERNAME_ALREADY_EXISTS);
+    }
+    if (error.response?.status === HTTPStatusCode.FORBIDDEN) {
+      throw new TechnicalError(JSON.stringify({
+        "code": error.response?.status,
+        "data": error.response?.data
+      }));
     }
     throw new TechnicalError("Failed to create keycloak user");
   }
