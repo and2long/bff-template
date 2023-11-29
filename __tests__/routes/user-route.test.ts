@@ -5,6 +5,7 @@ import request from "supertest";
 import { UserDTO } from "../../src/dtos/user-dto";
 import { Gender } from "../../src/constants/gender";
 import { BusinessError, HTTPStatusCode } from "@and2long/lib-commons";
+import { protectRouteSpy } from "../setup";
 
 describe("userRoute", () => {
   const baseUrl = "/api/users";
@@ -26,6 +27,7 @@ describe("userRoute", () => {
     test("should get user list by call user service", async () => {
       const findAllSpy = jest.spyOn(UserService, "findAll").mockResolvedValue([user]);
       const response = await request(app).get(baseUrl);
+      expect(protectRouteSpy).toHaveBeenCalled();
       expect(findAllSpy).toHaveBeenCalled();
       expect(response.status).toBe(200);
       expect(response.body).toEqual([user]);
