@@ -6,7 +6,7 @@ import { HTTPStatusCode } from "@and2long/lib-commons";
 export const userRoute = Router();
 userRoute.get("/", asyncHandler(async (req: Request, res: Response) => {
   const data = await UserService.findAll();
-  res.json({ data });
+  res.json(data);
 }));
 
 userRoute.post("/", asyncHandler(async (req: Request, res: Response) => {
