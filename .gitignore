@@ -12,3 +12,5 @@ dist/**/*
 .vscode
 package-lock.json
 yarn.lock
+
+http-request/http-client.env.json
