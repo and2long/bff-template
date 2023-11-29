@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApiError, ApiErrorType, BusinessError, TechnicalError } from "@and2long/lib-commons";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { serializeError } from "./error-serializer";
 
 export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  next: NextFunction,
 ): void => {
   const apiError: ApiError = transformToApiError(err);
   res.status(apiError.status);
