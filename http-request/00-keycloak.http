@@ -5,13 +5,13 @@ Content-Type: application/x-www-form-urlencoded
 client_id={{client_id}}&client_secret={{client_secret}}&grant_type=client_credentials
 
 > {%
-client.global.set("access_token_for_create_user", response.body.access_token);
+client.global.set("admin_access_token", response.body.access_token);
 %}
 
 ### create keycloak user
 POST {{base_url_keycloak}}/admin/realms/{{realm}}/users
 Content-Type: application/json
-Authorization: Bearer {{access_token_for_create_user}}
+Authorization: Bearer {{admin_access_token}}
 
 {
   "enabled": true,
